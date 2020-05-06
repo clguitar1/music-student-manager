@@ -40,6 +40,7 @@ router.post(
         parentName,
         email,
         phone,
+        lessonSlot,
         instrument,
         user: req.user.id,
       });
@@ -59,7 +60,7 @@ router.post(
 // @access   Private
 router.put('/:id', auth, async (req, res) => {
   // TODO: ADD lessonSlot
-  const { name, parentName, email, phone, instrument } = req.body;
+  const { name, parentName, email, phone, lessonSlot, instrument } = req.body;
 
   const studentFields = {};
   // TODO: ADD lessonSlot
@@ -67,6 +68,7 @@ router.put('/:id', auth, async (req, res) => {
   if (parentName) studentFields.parentName = parentName;
   if (email) studentFields.email = email;
   if (phone) studentFields.phone = phone;
+  if (lessonSlot) studentFields.lessonSlot = lessonSlot;
   if (instrument) studentFields.instrument = instrument;
 
   try {

@@ -22,14 +22,13 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // TODO: lessonSlot info comes from react-datepicker
   lessonSlot: {
     type: Date,
     required: true,
-    default: Date.now,
   },
   instrument: {
     type: String,
+    required: true,
     default: 'violin',
   },
   date: {
