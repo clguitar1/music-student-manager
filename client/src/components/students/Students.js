@@ -4,13 +4,21 @@ import StudentContext from '../../context/student/studentContext';
 
 const Students = () => {
   const studentContext = useContext(StudentContext);
-  const { students } = studentContext;
+  const { students, filtered } = studentContext;
+
+  if (students.length === 0) {
+    return <h4>Please add a student</h4>;
+  }
 
   return (
     <div className='Students'>
-      {students.map((student) => (
-        <StudentItem key={student.id} student={student} />
-      ))}
+      {filtered !== null
+        ? filtered.map((student) => (
+            <StudentItem key={student.id} student={student} />
+          ))
+        : students.map((student) => (
+            <StudentItem key={student.id} student={student} />
+          ))}
     </div>
   );
 };

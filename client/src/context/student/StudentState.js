@@ -9,10 +9,10 @@ import {
   DELETE_STUDENT,
   SET_CURRENT,
   CLEAR_CURRENT,
-  // UPDATE_STUDENT,
-  // FILTER_STUDENTS,
+  UPDATE_STUDENT,
+  FILTER_STUDENTS,
   // CLEAR_STUDENTS,
-  // CLEAR_FILTER,
+  CLEAR_FILTER,
   // STUDENT_ERROR,
 } from '../types';
 
@@ -48,6 +48,7 @@ const StudentState = (props) => {
       },
     ],
     current: null,
+    filtered: null,
   };
 
   const [state, dispatch] = useReducer(studentReducer, initialState);
@@ -74,20 +75,33 @@ const StudentState = (props) => {
   };
 
   // Update student
+  const updateStudent = (student) => {
+    dispatch({ type: UPDATE_STUDENT, payload: student });
+  };
 
   // Filter students
+  const filterStudents = (text) => {
+    dispatch({ type: FILTER_STUDENTS, payload: text });
+  };
 
   // Clear filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
 
   return (
     <StudentContext.Provider
       value={{
         students: state.students,
         current: state.current,
+        filtered: state.filtered,
         addStudent,
         deleteStudent,
         setCurrent,
         clearCurrent,
+        updateStudent,
+        filterStudents,
+        clearFilter,
       }}
     >
       {props.children}

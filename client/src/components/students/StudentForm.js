@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import StudentContext from '../../context/student/studentContext';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const StudentForm = () => {
   const studentContext = useContext(StudentContext);
-  const { addStudent } = studentContext;
+  const { addStudent, current, clearCurrent, updateStudent } = studentContext;
 
   const [student, setStudent] = useState({
     name: '',
@@ -16,19 +16,36 @@ const StudentForm = () => {
     instrument: '',
   });
 
+  //
+  useEffect(() => {
+    if (current !== null) {
+      setStudent(current);
+    } else {
+      setStudent({
+        name: '',
+        parentName: '',
+        email: '',
+        phone: '',
+        lessonSlot: '',
+        instrument: '',
+      });
+    }
+  }, [studentContext, current]);
+
+  const clearAll = () => {
+    clearCurrent();
+  };
+
   const { name, parentName, email, phone, lessonSlot, instrument } = student;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addStudent(student);
-    setStudent({
-      name: '',
-      parentName: '',
-      email: '',
-      phone: '',
-      lessonSlot: '',
-      instrument: '',
-    });
+    if (current === null) {
+      addStudent(student);
+    } else {
+      updateStudent(student);
+    }
+    clearAll();
   };
 
   const onChange = (e) =>
@@ -39,7 +56,9 @@ const StudentForm = () => {
   return (
     <div className='StudentForm'>
       <form onSubmit={onSubmit}>
-        <h2 className='text-primary'>Add Student</h2>
+        <h2 className='text-primary'>
+          {current ? 'Edit Student' : 'Add Student'}
+        </h2>
         <input
           type='text'
           placeholder='Student name'
@@ -93,8 +112,19 @@ const StudentForm = () => {
         />{' '}
         Guitar
         <div>
-          <input type='submit' className='btn btn-primary btn-block' />
+          <input
+            type='submit'
+            value={current ? 'Update Student' : 'Add Student'}
+            className='btn btn-primary btn-block'
+          />
         </div>
+        {current && (
+          <div>
+            <button className='btn btn-light btn-block' onClick={clearAll}>
+              Clear
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );
