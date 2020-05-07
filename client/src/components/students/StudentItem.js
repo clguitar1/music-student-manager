@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import StudentContext from '../../context/student/studentContext';
 
 const StudentItem = ({ student }) => {
+  const studentContext = useContext(StudentContext);
+  const { deleteStudent, setCurrent, clearCurrent } = studentContext;
+
   const {
     id,
     name,
@@ -12,6 +16,11 @@ const StudentItem = ({ student }) => {
     instrument,
     lessonSlot,
   } = student;
+
+  const onDelete = () => {
+    deleteStudent(id);
+    clearCurrent();
+  };
 
   const m = moment(lessonSlot, 'YYYY-MM-DD');
   const formattedLessonDate = m.format('LLLL');
@@ -43,9 +52,15 @@ const StudentItem = ({ student }) => {
         </li>
       </ul>
       <p>
-        <button className='btn btn-dark btn-sm'>Dark</button>
-        <button className='btn btn-danger btn-sm'>Danger</button>
-        <button className='btn btn-accent btn-sm'>Accent</button>
+        <button
+          className='btn btn-dark btn-sm'
+          onClick={() => setCurrent(student)}
+        >
+          Edit
+        </button>
+        <button className='btn btn-danger btn-sm' onClick={onDelete}>
+          Delete
+        </button>
       </p>
     </div>
   );

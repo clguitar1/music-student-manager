@@ -320,3 +320,8 @@ h2,
 h3 {
   text-align: center;
 }
+
+/* React-datepicker */
+.react-datepicker-wrapper {
+  width: 100%;
+}

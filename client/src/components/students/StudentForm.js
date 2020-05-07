@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const StudentForm = () => {
   const studentContext = useContext(StudentContext);
+  const { addStudent } = studentContext;
 
   const [student, setStudent] = useState({
     name: '',
@@ -19,7 +20,7 @@ const StudentForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    studentContext.addStudent(student);
+    addStudent(student);
     setStudent({
       name: '',
       parentName: '',
@@ -41,12 +42,13 @@ const StudentForm = () => {
         <h2 className='text-primary'>Add Student</h2>
         <input
           type='text'
-          placeholder='Name'
+          placeholder='Student name'
           name='name'
           value={name}
           onChange={onChange}
         />
         <DatePicker
+          placeholderText='Click to select a date and time'
           selected={lessonSlot}
           onChange={onChangeDate}
           showTimeSelect

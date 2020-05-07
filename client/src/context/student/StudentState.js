@@ -6,9 +6,9 @@ import studentReducer from './studentReducer';
 import {
   // GET_STUDENTS,
   ADD_STUDENT,
-  // DELETE_STUDENT,
-  // SET_CURRENT,
-  // CLEAR_CURRENT,
+  DELETE_STUDENT,
+  SET_CURRENT,
+  CLEAR_CURRENT,
   // UPDATE_STUDENT,
   // FILTER_STUDENTS,
   // CLEAR_STUDENTS,
@@ -47,6 +47,7 @@ const StudentState = (props) => {
         lessonSlot: new Date('Tue May 05 2020 13:58:25 GMT-0400'),
       },
     ],
+    current: null,
   };
 
   const [state, dispatch] = useReducer(studentReducer, initialState);
@@ -58,10 +59,19 @@ const StudentState = (props) => {
   };
 
   // Delete student
+  const deleteStudent = (id) => {
+    dispatch({ type: DELETE_STUDENT, payload: id });
+  };
 
   // Set current student in state.current with the edit button
+  const setCurrent = (student) => {
+    dispatch({ type: SET_CURRENT, payload: student });
+  };
 
   // clear current student
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
 
   // Update student
 
@@ -70,7 +80,16 @@ const StudentState = (props) => {
   // Clear filter
 
   return (
-    <StudentContext.Provider value={{ students: state.students, addStudent }}>
+    <StudentContext.Provider
+      value={{
+        students: state.students,
+        current: state.current,
+        addStudent,
+        deleteStudent,
+        setCurrent,
+        clearCurrent,
+      }}
+    >
       {props.children}
     </StudentContext.Provider>
   );
