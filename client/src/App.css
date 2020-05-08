@@ -26,7 +26,7 @@
   --primary-color: var(--gray-00);
   --secondary-color: var(--gray-05);
   --tertiary-color: var(--gray-10);
-  --quaternary-color: var(--gray-15);
+  --quaternary-color: var(--gray-85);
   /* background colors: lightest to darkest */
   --quaternary-background: var(--gray-10);
   --tertiary-background: var(--gray-85);

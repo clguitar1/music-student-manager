@@ -1,8 +1,13 @@
 import React, { useState, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
+import AlertContext from '../../context/alert/alertContext';
+import { set } from 'mongoose';
 
 const Register = () => {
   const authContext = useContext(AuthContext);
+  const alertContext = useContext(AlertContext);
+
+  const { setAlert } = alertContext;
 
   const [user, setUser] = useState({
     name: '',
@@ -18,17 +23,19 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log('Submitted');
-    // if (name === '' || email === '' || password === '' ) {
-    //   set
-    // } else {
-
-    // }
+    if (name === '' || email === '' || password === '') {
+      setAlert('Please fill in all fields', 'danger');
+    } else if (password !== password2) {
+      setAlert('Passwords do not match', 'danger');
+    } else {
+      console.log('Registered');
+    }
   };
 
   return (
-    <div class='Register form-container'>
+    <div className='Register form-container'>
       <h1>
-        Account <span className='text-primary'>Register</span>
+        Account <span className=''>Register</span>
       </h1>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
@@ -46,6 +53,7 @@ const Register = () => {
             name='password'
             value={password}
             onChange={onChange}
+            minLength='6'
           />
         </div>
         <div className='form-group'>
@@ -55,6 +63,7 @@ const Register = () => {
             name='password2'
             value={password2}
             onChange={onChange}
+            minLength='6'
           />
         </div>
         <input
