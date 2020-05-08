@@ -7,7 +7,7 @@ import StudentContext from '../../context/student/studentContext';
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
-  const studentContext = useContext(StudentContext);
+  //const studentContext = useContext(StudentContext);
 
   const { isAuthenticated, logout, user } = authContext;
   //const { clearStudents } = studentContext;
@@ -21,7 +21,7 @@ const Navbar = ({ title, icon }) => {
     <Fragment>
       <li>Hello {user && user.name}</li>
       <li>
-        <a onClick={onLogout} href='#'>
+        <a onClick={onLogout} href='#!'>
           <i className='fas fa-sign-out-alt'></i>
           <span> Logout</span>
         </a>

@@ -20,6 +20,7 @@ const StudentState = (props) => {
     students: [],
     current: null,
     filtered: null,
+    error: null,
   };
 
   const [state, dispatch] = useReducer(studentReducer, initialState);
@@ -77,6 +78,7 @@ const StudentState = (props) => {
         students: state.students,
         current: state.current,
         filtered: state.filtered,
+        error: state.error,
         addStudent,
         deleteStudent,
         setCurrent,

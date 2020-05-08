@@ -8,7 +8,7 @@ import {
   FILTER_STUDENTS,
   // CLEAR_STUDENTS,
   CLEAR_FILTER,
-  // STUDENT_ERROR,
+  STUDENT_ERROR,
 } from '../types';
 
 export default (state, action) => {
@@ -22,7 +22,7 @@ export default (state, action) => {
       return {
         ...state,
         students: state.students.filter(
-          (student) => student.id !== action.payload
+          (student) => student._id !== action.payload
         ),
       };
     case SET_CURRENT:
@@ -39,7 +39,7 @@ export default (state, action) => {
       return {
         ...state,
         students: state.students.map((student) =>
-          student.id === action.payload.id ? action.payload : student
+          student._id === action.payload._id ? action.payload : student
         ),
       };
     case FILTER_STUDENTS:
@@ -54,6 +54,11 @@ export default (state, action) => {
       return {
         ...state,
         filtered: null,
+      };
+    case STUDENT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

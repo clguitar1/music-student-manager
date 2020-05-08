@@ -31,11 +31,10 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     // get front end form input values
-    const { name, parentName, email, phone, instrument } = req.body;
+    const { name, parentName, email, phone, lessonSlot, instrument } = req.body;
 
     try {
       const newStudent = await new Student({
-        // TODO: ADD lessonSlot
         name,
         parentName,
         email,
@@ -49,7 +48,7 @@ router.post(
       // send the new student data to the front end
       res.json(student);
     } catch (err) {
-      console.error(error.message);
+      console.error(err.message);
       res.status(500).send('Server error');
     }
   }
@@ -59,11 +58,9 @@ router.post(
 // @desc     Update student
 // @access   Private
 router.put('/:id', auth, async (req, res) => {
-  // TODO: ADD lessonSlot
   const { name, parentName, email, phone, lessonSlot, instrument } = req.body;
 
   const studentFields = {};
-  // TODO: ADD lessonSlot
   if (name) studentFields.name = name;
   if (parentName) studentFields.parentName = parentName;
   if (email) studentFields.email = email;
