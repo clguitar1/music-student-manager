@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
 import StudentContext from './studentContext';
 import studentReducer from './studentReducer';
 import {
@@ -13,40 +12,12 @@ import {
   FILTER_STUDENTS,
   // CLEAR_STUDENTS,
   CLEAR_FILTER,
-  // STUDENT_ERROR,
+  STUDENT_ERROR,
 } from '../types';
 
 const StudentState = (props) => {
   const initialState = {
-    students: [
-      {
-        id: 1,
-        name: 'Jill Johnson',
-        parentName: 'Jills mom',
-        email: 'jill@gmail.com',
-        phone: '1111111111',
-        instrument: 'guitar',
-        lessonSlot: new Date('Tue May 05 2020 13:58:25 GMT-0400'),
-      },
-      {
-        id: 2,
-        name: 'Ted Johnson',
-        parentName: 'Teds mom',
-        email: 'Ted@gmail.com',
-        phone: '1111111111',
-        instrument: 'violin',
-        lessonSlot: new Date('Tue May 05 2020 13:58:25 GMT-0400'),
-      },
-      {
-        id: 3,
-        name: 'Bob Johnson',
-        parentName: 'Bobs mom',
-        email: 'Bob@gmail.com',
-        phone: '1111111111',
-        instrument: 'violin',
-        lessonSlot: new Date('Tue May 05 2020 13:58:25 GMT-0400'),
-      },
-    ],
+    students: [],
     current: null,
     filtered: null,
   };
@@ -54,9 +25,20 @@ const StudentState = (props) => {
   const [state, dispatch] = useReducer(studentReducer, initialState);
 
   // Add student
-  const addStudent = (student) => {
-    student.id = uuidv4();
-    dispatch({ type: ADD_STUDENT, payload: student });
+  const addStudent = async (student) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.post('/api/students', student, config);
+
+      dispatch({ type: ADD_STUDENT, payload: res.data });
+    } catch (err) {
+      dispatch({ type: STUDENT_ERROR, payload: err.response.msg });
+    }
   };
 
   // Delete student
