@@ -7,14 +7,14 @@ import StudentContext from '../../context/student/studentContext';
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
-  //const studentContext = useContext(StudentContext);
+  const studentContext = useContext(StudentContext);
 
   const { isAuthenticated, logout, user } = authContext;
-  //const { clearStudents } = studentContext;
+  const { clearStudents } = studentContext;
 
   const onLogout = () => {
     logout();
-    //clearStudents();
+    clearStudents();
   };
 
   const authLinks = (

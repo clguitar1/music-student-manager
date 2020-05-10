@@ -23,7 +23,7 @@ const StudentSchema = new mongoose.Schema({
     required: true,
   },
   lessonSlot: {
-    type: Date,
+    type: String,
     required: true,
   },
   instrument: {

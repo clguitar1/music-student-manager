@@ -1,24 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import StudentItem from './StudentItem';
 import StudentContext from '../../context/student/studentContext';
+import Spinner from '../layout/Spinner';
 
 const Students = () => {
   const studentContext = useContext(StudentContext);
-  const { students, filtered } = studentContext;
+  const { students, filtered, getStudents, loading } = studentContext;
 
-  if (students.length === 0) {
+  useEffect(() => {
+    getStudents();
+    // eslint-disable-next-line
+  }, []);
+
+  if (students !== null && (students.length === 0) & !loading) {
     return <h4>Please add a student</h4>;
   }
 
   return (
     <div className='Students'>
-      {filtered !== null
-        ? filtered.map((student) => (
+      {students !== null && !loading ? (
+        filtered !== null ? (
+          filtered.map((student) => (
             <StudentItem key={student._id} student={student} />
           ))
-        : students.map((student) => (
+        ) : (
+          students.map((student) => (
             <StudentItem key={student._id} student={student} />
-          ))}
+          ))
+        )
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 };

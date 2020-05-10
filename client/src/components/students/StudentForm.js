@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import StudentContext from '../../context/student/studentContext';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 const StudentForm = () => {
   const studentContext = useContext(StudentContext);
@@ -41,7 +42,21 @@ const StudentForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
-      addStudent(student);
+      // format lessonSlot to a string
+      const m = moment(lessonSlot, 'YYYY-MM-DD');
+
+      // create a new student object to save to the database
+      const newStudent = {
+        name,
+        parentName,
+        email,
+        phone,
+        lessonSlot: m.format('LLLL'),
+        instrument,
+      };
+
+      // save newStudent object to the database
+      addStudent(newStudent);
     } else {
       updateStudent(student);
     }
@@ -51,7 +66,9 @@ const StudentForm = () => {
   const onChange = (e) =>
     setStudent({ ...student, [e.target.name]: e.target.value });
 
-  const onChangeDate = (date) => setStudent({ ...student, lessonSlot: date });
+  const onChangeDate = (date) => {
+    setStudent({ ...student, lessonSlot: date });
+  };
 
   return (
     <div className='StudentForm'>

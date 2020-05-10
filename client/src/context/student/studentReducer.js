@@ -1,22 +1,29 @@
 import {
-  // GET_STUDENTS,
+  GET_STUDENTS,
   ADD_STUDENT,
   DELETE_STUDENT,
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_STUDENT,
   FILTER_STUDENTS,
-  // CLEAR_STUDENTS,
+  CLEAR_STUDENTS,
   CLEAR_FILTER,
   STUDENT_ERROR,
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
+    case GET_STUDENTS:
+      return {
+        ...state,
+        students: action.payload,
+        loading: false,
+      };
     case ADD_STUDENT:
       return {
         ...state,
         students: [...state.students, action.payload],
+        loading: false,
       };
     case DELETE_STUDENT:
       return {
@@ -24,6 +31,15 @@ export default (state, action) => {
         students: state.students.filter(
           (student) => student._id !== action.payload
         ),
+        loading: false,
+      };
+    case CLEAR_STUDENTS:
+      return {
+        ...state,
+        students: null,
+        filtered: null,
+        error: null,
+        current: null,
       };
     case SET_CURRENT:
       return {
@@ -41,6 +57,7 @@ export default (state, action) => {
         students: state.students.map((student) =>
           student._id === action.payload._id ? action.payload : student
         ),
+        loading: false,
       };
     case FILTER_STUDENTS:
       return {

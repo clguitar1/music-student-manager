@@ -22,9 +22,6 @@ const StudentItem = ({ student }) => {
     clearCurrent();
   };
 
-  const m = moment(lessonSlot, 'YYYY-MM-DD');
-  const formattedLessonDate = m.format('LLLL');
-
   return (
     <div className='StudentItem card bg-light'>
       <h3 className='text-primary text-left'>
@@ -41,7 +38,7 @@ const StudentItem = ({ student }) => {
       </h3>
       <ul className='list'>
         <li>
-          <i className='fas fa-calendar-alt'></i> {formattedLessonDate}
+          <i className='fas fa-calendar-alt'></i> {lessonSlot}
         </li>
         <li>Parent: {parentName}</li>
         <li>
