@@ -33,7 +33,6 @@ const Login = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitted');
     if (email === '' || password === '') {
       setAlert('Please fill in all fields', 'danger');
     } else {

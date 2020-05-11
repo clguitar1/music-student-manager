@@ -15,12 +15,17 @@ const StudentForm = () => {
     phone: '',
     lessonSlot: '',
     instrument: '',
+    attendance: '',
   });
 
-  //
+  // populate the form with student data on edit button click
   useEffect(() => {
     if (current !== null) {
-      setStudent(current);
+      const newCurrent = {
+        ...current,
+        lessonSlot: new Date(current.lessonSlot),
+      };
+      setStudent(newCurrent);
     } else {
       setStudent({
         name: '',
@@ -29,6 +34,7 @@ const StudentForm = () => {
         phone: '',
         lessonSlot: '',
         instrument: '',
+        attendance: '',
       });
     }
   }, [studentContext, current]);
@@ -37,26 +43,20 @@ const StudentForm = () => {
     clearCurrent();
   };
 
-  const { name, parentName, email, phone, lessonSlot, instrument } = student;
+  const {
+    name,
+    parentName,
+    email,
+    phone,
+    lessonSlot,
+    instrument,
+    attendance,
+  } = student;
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
-      // format lessonSlot to a string
-      const m = moment(lessonSlot, 'YYYY-MM-DD');
-
-      // create a new student object to save to the database
-      const newStudent = {
-        name,
-        parentName,
-        email,
-        phone,
-        lessonSlot: m.format('LLLL'),
-        instrument,
-      };
-
-      // save newStudent object to the database
-      addStudent(newStudent);
+      addStudent(student);
     } else {
       updateStudent(student);
     }
@@ -66,6 +66,7 @@ const StudentForm = () => {
   const onChange = (e) =>
     setStudent({ ...student, [e.target.name]: e.target.value });
 
+  // set lessonSlot state to date object from DatePicker
   const onChangeDate = (date) => {
     setStudent({ ...student, lessonSlot: date });
   };
@@ -111,7 +112,7 @@ const StudentForm = () => {
           value={phone}
           onChange={onChange}
         />
-        <h5>Student Instrument</h5>
+        <h5>Instrument</h5>
         <input
           type='radio'
           name='instrument'
@@ -128,6 +129,23 @@ const StudentForm = () => {
           onChange={onChange}
         />{' '}
         Guitar
+        <h5>Attendance</h5>
+        <input
+          type='radio'
+          name='attendance'
+          value='present'
+          checked={attendance === 'present'}
+          onChange={onChange}
+        />{' '}
+        Present{'  '}
+        <input
+          type='radio'
+          name='attendance'
+          value='absent'
+          checked={attendance === 'absent'}
+          onChange={onChange}
+        />{' '}
+        Absent
         <div>
           <input
             type='submit'

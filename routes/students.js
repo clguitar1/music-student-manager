@@ -31,7 +31,15 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     // get front end form input values
-    const { name, parentName, email, phone, lessonSlot, instrument } = req.body;
+    const {
+      name,
+      parentName,
+      email,
+      phone,
+      lessonSlot,
+      instrument,
+      attendance,
+    } = req.body;
 
     try {
       const newStudent = await new Student({
@@ -41,6 +49,7 @@ router.post(
         phone,
         lessonSlot,
         instrument,
+        attendance,
         user: req.user.id,
       });
 

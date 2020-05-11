@@ -1,25 +1,30 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import StudentContext from '../../context/student/studentContext';
+import moment from 'moment';
 
 const StudentItem = ({ student }) => {
   const studentContext = useContext(StudentContext);
   const { deleteStudent, setCurrent, clearCurrent } = studentContext;
 
   const {
-    id,
+    _id,
     name,
     parentName,
     email,
     phone,
     instrument,
     lessonSlot,
+    attendance,
   } = student;
 
   const onDelete = () => {
-    deleteStudent(id);
+    deleteStudent(_id);
     clearCurrent();
+  };
+
+  const onEdit = () => {
+    setCurrent(student);
   };
 
   return (
@@ -30,15 +35,17 @@ const StudentItem = ({ student }) => {
           style={{ float: 'right' }}
           className={
             'badge ' +
-            (instrument === 'violin' ? 'badge-success' : 'badge-primary')
+            (attendance === 'present' ? 'badge-success' : 'badge-primary')
           }
         >
-          {instrument}
+          {attendance}
         </span>
       </h3>
       <ul className='list'>
+        <li>{instrument}</li>
         <li>
-          <i className='fas fa-calendar-alt'></i> {lessonSlot}
+          <i className='fas fa-calendar-alt'></i>{' '}
+          {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
         </li>
         <li>Parent: {parentName}</li>
         <li>
@@ -49,10 +56,7 @@ const StudentItem = ({ student }) => {
         </li>
       </ul>
       <p>
-        <button
-          className='btn btn-dark btn-sm'
-          onClick={() => setCurrent(student)}
-        >
+        <button className='btn btn-dark btn-sm' onClick={onEdit}>
           Edit
         </button>
         <button className='btn btn-danger btn-sm' onClick={onDelete}>

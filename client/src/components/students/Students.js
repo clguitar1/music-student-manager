@@ -7,6 +7,7 @@ const Students = () => {
   const studentContext = useContext(StudentContext);
   const { students, filtered, getStudents, loading } = studentContext;
 
+  // populate the page with list of students
   useEffect(() => {
     getStudents();
     // eslint-disable-next-line

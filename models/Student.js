@@ -23,13 +23,17 @@ const StudentSchema = new mongoose.Schema({
     required: true,
   },
   lessonSlot: {
-    type: String,
+    type: Date,
     required: true,
   },
   instrument: {
     type: String,
     required: true,
     default: 'violin',
+  },
+  attendance: {
+    type: String,
+    required: true,
   },
   date: {
     type: Date,

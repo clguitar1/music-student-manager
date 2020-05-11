@@ -22,7 +22,7 @@ export default (state, action) => {
     case ADD_STUDENT:
       return {
         ...state,
-        students: [...state.students, action.payload],
+        students: [action.payload, ...state.students],
         loading: false,
       };
     case DELETE_STUDENT:
@@ -60,6 +60,7 @@ export default (state, action) => {
         loading: false,
       };
     case FILTER_STUDENTS:
+      // filter students by name or email
       return {
         ...state,
         filtered: state.students.filter((student) => {

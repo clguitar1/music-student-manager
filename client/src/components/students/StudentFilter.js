@@ -29,7 +29,7 @@ const StudentFilter = () => {
           // get a reference to the input's DOM node
           ref={text}
           type='text'
-          placeholder='Filter students...'
+          placeholder='Filter students by name or email...'
           onChange={onChange}
         />
       </form>
