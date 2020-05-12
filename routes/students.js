@@ -37,6 +37,7 @@ router.post(
       email,
       phone,
       lessonSlot,
+      assignment,
       instrument,
       attendance,
     } = req.body;
@@ -48,6 +49,7 @@ router.post(
         email,
         phone,
         lessonSlot,
+        assignment,
         instrument,
         attendance,
         user: req.user.id,

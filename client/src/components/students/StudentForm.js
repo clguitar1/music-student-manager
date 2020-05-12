@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import StudentContext from '../../context/student/studentContext';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import moment from 'moment';
 
 const StudentForm = () => {
   const studentContext = useContext(StudentContext);
@@ -14,6 +13,7 @@ const StudentForm = () => {
     email: '',
     phone: '',
     lessonSlot: '',
+    assignment: '',
     instrument: '',
     attendance: '',
   });
@@ -33,6 +33,7 @@ const StudentForm = () => {
         email: '',
         phone: '',
         lessonSlot: '',
+        assignment: '',
         instrument: '',
         attendance: '',
       });
@@ -49,6 +50,7 @@ const StudentForm = () => {
     email,
     phone,
     lessonSlot,
+    assignment,
     instrument,
     attendance,
   } = student;
@@ -90,6 +92,13 @@ const StudentForm = () => {
           onChange={onChangeDate}
           showTimeSelect
           dateFormat='MMMM d, yyyy h:mm aa'
+        />
+        <input
+          type='text'
+          placeholder='Assignment'
+          name='assignment'
+          value={assignment}
+          onChange={onChange}
         />
         <input
           type='text'

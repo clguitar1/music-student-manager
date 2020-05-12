@@ -15,6 +15,7 @@ const StudentItem = ({ student }) => {
     phone,
     instrument,
     lessonSlot,
+    assignment,
     attendance,
   } = student;
 
@@ -47,6 +48,7 @@ const StudentItem = ({ student }) => {
           <i className='fas fa-calendar-alt'></i>{' '}
           {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
         </li>
+        <li>Assignment: {assignment}</li>
         <li>Parent: {parentName}</li>
         <li>
           <i className='fas fa-envelope-open'></i> {email}
