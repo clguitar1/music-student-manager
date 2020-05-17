@@ -18,6 +18,9 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  alternateEmail: {
+    type: String,
+  },
   phone: {
     type: String,
     required: true,
@@ -37,7 +40,6 @@ const StudentSchema = new mongoose.Schema({
   },
   attendance: {
     type: String,
-    required: true,
   },
   date: {
     type: Date,

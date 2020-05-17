@@ -52,6 +52,7 @@ export default (state, action) => {
         current: null,
       };
     case UPDATE_STUDENT:
+      console.log(action.payload);
       return {
         ...state,
         students: state.students.map((student) =>

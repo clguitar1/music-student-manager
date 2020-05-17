@@ -2,10 +2,15 @@ import React, { useState, useContext, useEffect } from 'react';
 import StudentContext from '../../context/student/studentContext';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Link } from 'react-router-dom';
+import AlertContext from '../../context/alert/alertContext';
 
-const StudentForm = () => {
+const EditStudent = () => {
   const studentContext = useContext(StudentContext);
-  const { addStudent, current, clearCurrent, updateStudent } = studentContext;
+  const alertContext = useContext(AlertContext);
+
+  const { current, clearCurrent, updateStudent } = studentContext;
+  const { setAlert } = alertContext;
 
   const [student, setStudent] = useState({
     name: '',
@@ -60,13 +65,15 @@ const StudentForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (current === null) {
-      addStudent(student);
-    } else {
+    // update student data
+    if (current !== null) {
       updateStudent(student);
+      setAlert('Student Updated', 'success');
     }
-    // clear the form
+    // set current back to null
     clearAll();
+    // redirect back to home page after submit
+    // props.history.push('/');
   };
 
   const onChange = (e) =>
@@ -80,9 +87,7 @@ const StudentForm = () => {
   return (
     <div className='StudentForm'>
       <form onSubmit={onSubmit}>
-        <h2 className='text-primary'>
-          {current ? 'Edit Student' : 'Add Student'}
-        </h2>
+        <h2 className='text-secondary'>Edit Student</h2>
         <input
           type='text'
           placeholder='Student name'
@@ -133,64 +138,68 @@ const StudentForm = () => {
           onChange={onChange}
         />
         <h5>Instrument</h5>
-        <input
-          type='radio'
-          name='instrument'
-          value='violin'
-          checked={instrument === 'violin'}
-          onChange={onChange}
-        />{' '}
-        Violin{'  '}
-        <input
-          type='radio'
-          name='instrument'
-          value='guitar'
-          checked={instrument === 'guitar'}
-          onChange={onChange}
-        />{' '}
-        Guitar
-        <h5>Attendance</h5>
-        <input
-          type='radio'
-          name='attendance'
-          value='present'
-          checked={attendance === 'present'}
-          onChange={onChange}
-        />{' '}
-        Present{'  '}
-        <input
-          type='radio'
-          name='attendance'
-          value='absent'
-          checked={attendance === 'absent'}
-          onChange={onChange}
-        />{' '}
-        Absent{' '}
-        <input
-          type='radio'
-          name='attendance'
-          value=''
-          checked={attendance === ''}
-          onChange={onChange}
-        />{' '}
-        None
+        <div className='radio'>
+          <input
+            type='radio'
+            name='instrument'
+            value='violin'
+            checked={instrument === 'violin'}
+            onChange={onChange}
+          />{' '}
+          Violin{'  '}
+          <input
+            type='radio'
+            name='instrument'
+            value='guitar'
+            checked={instrument === 'guitar'}
+            onChange={onChange}
+          />{' '}
+          Guitar
+          <h5>Attendance</h5>
+          <input
+            type='radio'
+            name='attendance'
+            value='present'
+            checked={attendance === 'present'}
+            onChange={onChange}
+          />{' '}
+          Present{'  '}
+          <input
+            type='radio'
+            name='attendance'
+            value='absent'
+            checked={attendance === 'absent'}
+            onChange={onChange}
+          />{' '}
+          Absent{' '}
+          <input
+            type='radio'
+            name='attendance'
+            value=''
+            checked={attendance === ''}
+            onChange={onChange}
+          />{' '}
+          None
+        </div>
+
         <div>
           <input
             type='submit'
-            value={current ? 'Update Student' : 'Add Student'}
+            value={'Update Lesson'}
             className='btn btn-primary btn-block'
           />
         </div>
-        {current && (
-          <div>
-            <button className='btn btn-light btn-block' onClick={clearAll}>
-              Clear
-            </button>
-          </div>
-        )}
+        <div>
+          <button className='btn btn-light btn-block' onClick={clearAll}>
+            Clear
+          </button>
+        </div>
       </form>
+      <Link onClick={clearAll} className='btn btn-light' to='/'>
+        Back
+      </Link>
     </div>
   );
 };
 
-export default StudentForm;
+export default EditStudent;

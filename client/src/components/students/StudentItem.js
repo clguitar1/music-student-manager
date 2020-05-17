@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import StudentContext from '../../context/student/studentContext';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const StudentItem = ({ student }) => {
   const studentContext = useContext(StudentContext);
@@ -12,6 +13,7 @@ const StudentItem = ({ student }) => {
     name,
     parentName,
     email,
+    alternateEmail,
     phone,
     instrument,
     lessonSlot,
@@ -32,15 +34,17 @@ const StudentItem = ({ student }) => {
     <div className='StudentItem card bg-light'>
       <h3 className='text-primary text-left'>
         {name}{' '}
-        <span
-          style={{ float: 'right' }}
-          className={
-            'badge ' +
-            (attendance === 'present' ? 'badge-success' : 'badge-primary')
-          }
-        >
-          {attendance}
-        </span>
+        {attendance && (
+          <span
+            style={{ float: 'right' }}
+            className={
+              'badge ' +
+              (attendance === 'present' ? 'badge-success' : 'badge-primary')
+            }
+          >
+            {attendance}
+          </span>
+        )}
       </h3>
       <ul className='list'>
         <li>{instrument}</li>
@@ -53,14 +57,22 @@ const StudentItem = ({ student }) => {
         <li>
           <i className='fas fa-envelope-open'></i> {email}
         </li>
+        {alternateEmail && (
+          <li>
+            <i className='fas fa-envelope-open'></i> {alternateEmail}
+          </li>
+        )}
         <li>
           <i className='fas fa-phone'></i> {phone}
         </li>
       </ul>
       <p>
-        <button className='btn btn-dark btn-sm' onClick={onEdit}>
+        {/* <button className='btn btn-dark btn-sm' onClick={onEdit}>
           Edit
-        </button>
+        </button> */}
+        <Link onClick={onEdit} to='/edit-student' className='btn btn-dark mr-2'>
+          Edit
+        </Link>
         <button className='btn btn-danger btn-sm' onClick={onDelete}>
           Delete
         </button>

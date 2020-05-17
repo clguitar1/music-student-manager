@@ -35,6 +35,7 @@ router.post(
       name,
       parentName,
       email,
+      alternateEmail,
       phone,
       lessonSlot,
       assignment,
@@ -47,6 +48,7 @@ router.post(
         name,
         parentName,
         email,
+        alternateEmail,
         phone,
         lessonSlot,
         assignment,
@@ -69,16 +71,17 @@ router.post(
 // @desc     Update student
 // @access   Private
 router.put('/:id', auth, async (req, res) => {
-  const { name, parentName, email, phone, lessonSlot, instrument } = req.body;
+  // const { name, parentName, email, phone, lessonSlot, instrument } = req.body;
 
-  const studentFields = {};
-  if (name) studentFields.name = name;
-  if (parentName) studentFields.parentName = parentName;
-  if (email) studentFields.email = email;
-  if (phone) studentFields.phone = phone;
-  if (lessonSlot) studentFields.lessonSlot = lessonSlot;
-  if (instrument) studentFields.instrument = instrument;
+  // const studentFields = {};
+  // if (name) studentFields.name = name;
+  // if (parentName) studentFields.parentName = parentName;
+  // if (email) studentFields.email = email;
+  // if (phone) studentFields.phone = phone;
+  // if (lessonSlot) studentFields.lessonSlot = lessonSlot;
+  // if (instrument) studentFields.instrument = instrument;
 
+  const studentFields = req.body;
   try {
     let student = await Student.findById(req.params.id);
 

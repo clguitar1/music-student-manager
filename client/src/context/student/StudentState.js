@@ -66,6 +66,7 @@ const StudentState = (props) => {
 
   // Update student
   const updateStudent = async (student) => {
+    console.log(student);
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ const StudentState = (props) => {
         student,
         config
       );
-
+      console.log(res.data);
       dispatch({ type: UPDATE_STUDENT, payload: res.data });
     } catch (err) {
       dispatch({ type: STUDENT_ERROR, payload: err.response.msg });

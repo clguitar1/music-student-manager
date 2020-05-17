@@ -2,10 +2,15 @@ import React, { useState, useContext, useEffect } from 'react';
 import StudentContext from '../../context/student/studentContext';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Link } from 'react-router-dom';
+import AlertContext from '../../context/alert/alertContext';
 
-const StudentForm = () => {
+const CreateStudent = () => {
   const studentContext = useContext(StudentContext);
+  const alertContext = useContext(AlertContext);
+
   const { addStudent, current, clearCurrent, updateStudent } = studentContext;
+  const { setAlert } = alertContext;
 
   const [student, setStudent] = useState({
     name: '',
@@ -62,9 +67,9 @@ const StudentForm = () => {
     e.preventDefault();
     if (current === null) {
       addStudent(student);
-    } else {
-      updateStudent(student);
+      setAlert('Student Added', 'success');
     }
+
     // clear the form
     clearAll();
   };
@@ -80,9 +85,7 @@ const StudentForm = () => {
   return (
     <div className='StudentForm'>
       <form onSubmit={onSubmit}>
-        <h2 className='text-primary'>
-          {current ? 'Edit Student' : 'Add Student'}
-        </h2>
+        <h2 className='text-secondary'>Add Student</h2>
         <input
           type='text'
           placeholder='Student name'
@@ -165,32 +168,25 @@ const StudentForm = () => {
           checked={attendance === 'absent'}
           onChange={onChange}
         />{' '}
-        Absent{' '}
-        <input
-          type='radio'
-          name='attendance'
-          value=''
-          checked={attendance === ''}
-          onChange={onChange}
-        />{' '}
-        None
+        Absent
         <div>
           <input
             type='submit'
-            value={current ? 'Update Student' : 'Add Student'}
+            value={'Add Student'}
             className='btn btn-primary btn-block'
           />
         </div>
-        {current && (
-          <div>
-            <button className='btn btn-light btn-block' onClick={clearAll}>
-              Clear
-            </button>
-          </div>
-        )}
+        <div>
+          <button className='btn btn-light btn-block' onClick={clearAll}>
+            Clear
+          </button>
+        </div>
       </form>
+      <Link className='btn btn-light' to='/'>
+        Back
+      </Link>
     </div>
   );
 };
 
-export default StudentForm;
+export default CreateStudent;

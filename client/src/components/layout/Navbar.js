@@ -10,7 +10,7 @@ const Navbar = ({ title, icon }) => {
   const studentContext = useContext(StudentContext);
 
   const { isAuthenticated, logout, user } = authContext;
-  const { clearStudents } = studentContext;
+  const { clearCurrent, clearStudents } = studentContext;
 
   const onLogout = () => {
     logout();
@@ -19,6 +19,15 @@ const Navbar = ({ title, icon }) => {
 
   const authLinks = (
     <Fragment>
+      <li>
+        <Link
+          onClick={clearCurrent}
+          className='btn btn-light'
+          to='/create-student'
+        >
+          New Student
+        </Link>
+      </li>
       <li>Hello {user && user.name}</li>
       <li>
         <a onClick={onLogout} href='#!'>
@@ -56,7 +65,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'Student Tracker',
+  title: 'Lesson Tracker',
   icon: 'fas fa-id-card-alt',
 };
 

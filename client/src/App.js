@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
+import CreateStudent from './components/students/CreateStudent';
+import EditStudent from './components/students/EditStudent';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alerts from './components/layout/Alerts';
@@ -29,10 +31,20 @@ const App = () => {
               <div className='container'>
                 <Alerts />
                 <Switch>
-                  <PrivateRoute exact path='/' component={Home} />
                   <Route exact path='/about' component={About} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
+                  <PrivateRoute exact path='/' component={Home} />
+                  <PrivateRoute
+                    exact
+                    path='/create-student'
+                    component={CreateStudent}
+                  />
+                  <PrivateRoute
+                    exact
+                    path='/edit-student'
+                    component={EditStudent}
+                  />
                 </Switch>
               </div>
             </div>
