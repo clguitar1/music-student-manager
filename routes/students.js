@@ -11,7 +11,9 @@ const Student = require('../models/Student');
 // @access   Private
 router.get('/', auth, async (req, res) => {
   try {
-    const students = await Student.find({ user: req.user.id });
+    const students = await Student.find({ user: req.user.id }).populate(
+      'lessons'
+    );
     res.json(students);
   } catch (err) {
     console.error(err.message);
@@ -107,7 +109,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // @route    DELETE api/students/:id
-// @desc     Delete student
+// @desc     Delete student and its lessons
 // @access   Private
 router.delete('/:id', auth, async (req, res) => {
   try {
@@ -121,9 +123,12 @@ router.delete('/:id', auth, async (req, res) => {
       return res.status(401).json({ msg: 'Unauthorized' });
     }
 
-    await Student.findByIdAndRemove(req.params.id);
+    //await Student.findByIdAndRemove(req.params.id);
 
-    res.json({ msg: 'Student removed' });
+    // trigger pre remove middleware in Bootcamp model. findByIdAndRemove won't work
+    await student.remove();
+
+    res.json({ success: true, data: {}, msg: 'Student removed' });
   } catch (err) {
     console.error(error.message);
     res.status(500).send('Server error');

@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "5ee37ff9608baa2140f3928a",
+    "name": "test student 1",
+    "parentName": "Test dad",
+    "email": "test1@test.com",
+    "alternateEmail": "test@gmail.com",
+    "phone": "123-1234",
+    "instrument": "recorder",
+    "user": "5eadae425e27e92da0c7746d"
+  },
+  {
+    "_id": "5ee380c4608baa2140f3928c",
+    "name": "test student 2",
+    "parentName": "Test dad 2",
+    "email": "test2@test.com",
+    "alternateEmail": "test2@gmail.com",
+    "phone": "123-1234",
+    "instrument": "guitar",
+    "user": "5eadae425e27e92da0c7746d"
+  },
+  {
+    "_id": "5ec16c543e94b619441386ff",
+    "name": "test student 3",
+    "parentName": "Test dad 3",
+    "email": "test3@test.com",
+    "alternateEmail": "test3@gmail.com",
+    "phone": "123-1234",
+    "instrument": "violin",
+    "user": "5eadae425e27e92da0c7746d"
+  }
+]

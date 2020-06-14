@@ -1,0 +1,56 @@
+[
+  {
+    "_id": "5ee388efe256eef70650e91d",
+    "assignment": "test lesson 1",
+    "attendance": "present",
+    "lessonSlot": "2020-06-12T13:56:56.000Z",
+    "createdAt": "2020-06-12T13:56:56.000Z",
+    "student": "5ee37ff9608baa2140f3928a",
+    "user": "5eadae425e27e92da0c7746d"
+  },
+  {
+    "_id": "5ee38b59fe54bf18b4ee1234",
+    "assignment": "test lesson 2",
+    "attendance": "absent",
+    "lessonSlot": "2020-06-12T13:56:56.000Z",
+    "createdAt": "2020-06-12T13:56:56.000Z",
+    "student": "5ee37ff9608baa2140f3928a",
+    "user": "5eadae425e27e92da0c7746d"
+  },
+  {
+    "_id": "5ee38b59fe54bf18b4ee3191",
+    "assignment": "test lesson 3",
+    "attendance": "present",
+    "lessonSlot": "2020-06-12T13:56:56.000Z",
+    "createdAt": "2020-06-12T13:56:56.000Z",
+    "student": "5ee380c4608baa2140f3928c",
+    "user": "5eadae425e27e92da0c7746d"
+  },
+  {
+    "_id": "5ee38b59fe54bf18b4ee5678",
+    "assignment": "test lesson 4",
+    "attendance": "present",
+    "lessonSlot": "2020-06-12T13:56:56.000Z",
+    "createdAt": "2020-06-12T13:56:56.000Z",
+    "student": "5ee380c4608baa2140f3928c",
+    "user": "5eadae425e27e92da0c7746d"
+  },
+  {
+    "_id": "5ee38b59fe54bf18b4ee9021",
+    "assignment": "test lesson 5",
+    "attendance": "present",
+    "lessonSlot": "2020-06-12T13:56:56.000Z",
+    "createdAt": "2020-06-12T13:56:56.000Z",
+    "student": "5ec16c543e94b619441386ff",
+    "user": "5eadae425e27e92da0c7746d"
+  },
+  {
+    "_id": "5ee38b59fe54bf18b4ee1122",
+    "assignment": "test lesson 6",
+    "attendance": "present",
+    "lessonSlot": "2020-06-12T13:56:56.000Z",
+    "createdAt": "2020-06-12T13:56:56.000Z",
+    "student": "5ec16c543e94b619441386ff",
+    "user": "5eadae425e27e92da0c7746d"
+  }
+]
