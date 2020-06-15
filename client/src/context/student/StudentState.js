@@ -4,6 +4,7 @@ import StudentContext from './studentContext';
 import studentReducer from './studentReducer';
 import {
   GET_STUDENTS,
+  GET_STUDENT,
   ADD_STUDENT,
   DELETE_STUDENT,
   SET_CURRENT,
@@ -17,6 +18,7 @@ import {
 
 const StudentState = (props) => {
   const initialState = {
+    student: null,
     students: null,
     current: null,
     filtered: null,
@@ -31,6 +33,21 @@ const StudentState = (props) => {
       const res = await axios.get('/api/students');
 
       dispatch({ type: GET_STUDENTS, payload: res.data });
+    } catch (err) {
+      dispatch({ type: STUDENT_ERROR, payload: err.response.msg });
+    }
+  };
+
+  // Get student by ID
+  const getStudentById = async (userId) => {
+    try {
+      const res = await axios.get(`/api/students/${userId}`);
+
+      dispatch({
+        type: GET_STUDENT,
+        payload: res.data,
+      });
+      console.log(res.data);
     } catch (err) {
       dispatch({ type: STUDENT_ERROR, payload: err.response.msg });
     }
@@ -114,6 +131,7 @@ const StudentState = (props) => {
   return (
     <StudentContext.Provider
       value={{
+        student: state.student,
         students: state.students,
         current: state.current,
         filtered: state.filtered,
@@ -126,6 +144,7 @@ const StudentState = (props) => {
         filterStudents,
         clearFilter,
         getStudents,
+        getStudentById,
         clearStudents,
       }}
     >

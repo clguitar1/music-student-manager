@@ -13,13 +13,14 @@ const Students = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (students !== null && (students.length === 0) & !loading) {
+  if (students !== null && students.length === 0 && !loading) {
     return <h4>Please add a student</h4>;
   }
 
   return (
     <div className='Students'>
       {students !== null && !loading ? (
+        // map through live search results
         filtered !== null ? (
           filtered.map((student) => (
             <StudentItem key={student._id} student={student} />

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import StudentContext from '../../context/student/studentContext';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 
@@ -18,10 +18,10 @@ const CreateStudent = () => {
     email: '',
     alternateEmail: '',
     phone: '',
-    lessonSlot: '',
-    assignment: '',
+    // lessonSlot: '',
+    // assignment: '',
     instrument: '',
-    attendance: '',
+    // attendance: '',
   });
 
   // populate the form with student data on edit button click
@@ -29,7 +29,7 @@ const CreateStudent = () => {
     if (current !== null) {
       const newCurrent = {
         ...current,
-        lessonSlot: new Date(current.lessonSlot),
+        // lessonSlot: new Date(current.lessonSlot),
       };
       setStudent(newCurrent);
     } else {
@@ -39,10 +39,10 @@ const CreateStudent = () => {
         email: '',
         alternateEmail: '',
         phone: '',
-        lessonSlot: '',
-        assignment: '',
+        // lessonSlot: '',
+        // assignment: '',
         instrument: '',
-        attendance: '',
+        // attendance: '',
       });
     }
   }, [studentContext, current]);
@@ -57,10 +57,10 @@ const CreateStudent = () => {
     email,
     alternateEmail,
     phone,
-    lessonSlot,
-    assignment,
+    // lessonSlot,
+    // assignment,
     instrument,
-    attendance,
+    // attendance,
   } = student;
 
   const onSubmit = (e) => {
@@ -93,20 +93,20 @@ const CreateStudent = () => {
           value={name}
           onChange={onChange}
         />
-        <DatePicker
+        {/* <DatePicker
           placeholderText='Click to select a date and time'
           selected={lessonSlot}
           onChange={onChangeDate}
           showTimeSelect
           dateFormat='MMMM d, yyyy h:mm aa'
-        />
-        <input
+        /> */}
+        {/* <input
           type='text'
           placeholder='Assignment'
           name='assignment'
           value={assignment}
           onChange={onChange}
-        />
+        /> */}
         <input
           type='text'
           placeholder='Parent name'
@@ -152,7 +152,7 @@ const CreateStudent = () => {
           onChange={onChange}
         />{' '}
         Guitar
-        <h5>Attendance</h5>
+        {/* <h5>Attendance</h5>
         <input
           type='radio'
           name='attendance'
@@ -168,7 +168,7 @@ const CreateStudent = () => {
           checked={attendance === 'absent'}
           onChange={onChange}
         />{' '}
-        Absent
+        Absent */}
         <div>
           <input
             type='submit'

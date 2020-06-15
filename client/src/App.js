@@ -5,6 +5,8 @@ import Home from './components/pages/Home';
 import About from './components/pages/About';
 import CreateStudent from './components/students/CreateStudent';
 import EditStudent from './components/students/EditStudent';
+import Students from './components/students/Students';
+import Student from './components/students/Student';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alerts from './components/layout/Alerts';
@@ -45,6 +47,8 @@ const App = () => {
                     path='/edit-student'
                     component={EditStudent}
                   />
+                  <PrivateRoute exact path='/students' component={Students} />
+                  <PrivateRoute exact path='/student/:id' component={Student} />
                 </Switch>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import StudentContext from '../../context/student/studentContext';
-import moment from 'moment';
+// import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const StudentItem = ({ student }) => {
@@ -16,9 +16,9 @@ const StudentItem = ({ student }) => {
     alternateEmail,
     phone,
     instrument,
-    lessonSlot,
-    assignment,
-    attendance,
+    // lessonSlot,
+    // assignment,
+    // attendance,
   } = student;
 
   const onDelete = () => {
@@ -34,7 +34,7 @@ const StudentItem = ({ student }) => {
     <div className='StudentItem card bg-light'>
       <h3 className='text-primary text-left'>
         {name}{' '}
-        {attendance && (
+        {/* {attendance && (
           <span
             style={{ float: 'right' }}
             className={
@@ -44,15 +44,15 @@ const StudentItem = ({ student }) => {
           >
             {attendance}
           </span>
-        )}
+        )} */}
       </h3>
       <ul className='list'>
         <li>{instrument}</li>
-        <li>
+        {/* <li>
           <i className='fas fa-calendar-alt'></i>{' '}
           {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
         </li>
-        <li>Assignment: {assignment}</li>
+        <li>Assignment: {assignment}</li> */}
         <li>Parent: {parentName}</li>
         <li>
           <i className='fas fa-envelope-open'></i> {email}
@@ -76,6 +76,9 @@ const StudentItem = ({ student }) => {
         <button className='btn btn-danger btn-sm' onClick={onDelete}>
           Delete
         </button>
+        <Link to={`/student/${_id}`} className='btn btn-dark mr-2'>
+          View Student
+        </Link>
       </p>
     </div>
   );

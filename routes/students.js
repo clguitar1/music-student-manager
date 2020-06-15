@@ -21,53 +21,59 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// @desc     Get single student
+// @route    GET /api/students/:id
+// @access   Private
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.id).populate('lessons');
+
+    // 404: Not found
+    if (!student)
+      return res
+        .status(404)
+        .json({ msg: `Student not found with id of ${req.params.id}` });
+
+    res.json(student);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 // @route    POST api/students
 // @desc     Add new student
 // @access   Private
-router.post(
-  '/',
-  [auth, [check('name', 'Name is required').not().isEmpty()]],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    // get front end form input values
-    const {
+router.post('/', async (req, res) => {
+  // get front end form input values
+  const {
+    name,
+    parentName,
+    email,
+    alternateEmail,
+    phone,
+    instrument,
+  } = req.body;
+
+  try {
+    const newStudent = await new Student({
       name,
       parentName,
       email,
       alternateEmail,
       phone,
-      lessonSlot,
-      assignment,
       instrument,
-      attendance,
-    } = req.body;
+      user: req.user.id,
+    });
 
-    try {
-      const newStudent = await new Student({
-        name,
-        parentName,
-        email,
-        alternateEmail,
-        phone,
-        lessonSlot,
-        assignment,
-        instrument,
-        attendance,
-        user: req.user.id,
-      });
-
-      const student = await newStudent.save();
-      // send the new student data to the front end
-      res.json(student);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error');
-    }
+    const student = await newStudent.save();
+    // send the new student data to the front end
+    res.json(student);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
-);
+});
 
 // @route    PUT api/students/:id
 // @desc     Update student

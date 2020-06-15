@@ -44,8 +44,8 @@ router.get('/', auth, async (req, res) => {
 router.get('/:id', auth, async (req, res) => {
   try {
     const lesson = await Lesson.findById(req.params.id).populate({
-      path: 'students',
-      select: 'assignment attendance lessonSlot student.name',
+      path: 'student',
+      select: 'assignment attendance lessonSlot student',
     });
 
     res.status(200).json({

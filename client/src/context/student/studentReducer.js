@@ -1,5 +1,6 @@
 import {
   GET_STUDENTS,
+  GET_STUDENT,
   ADD_STUDENT,
   DELETE_STUDENT,
   SET_CURRENT,
@@ -18,6 +19,12 @@ export default (state, action) => {
         ...state,
         students: action.payload,
         loading: false,
+      };
+    case GET_STUDENT:
+      console.log(action.payload);
+      return {
+        ...state,
+        student: action.payload,
       };
     case ADD_STUDENT:
       return {
