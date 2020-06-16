@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import StudentContext from '../../context/student/studentContext';
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 
-const EditStudent = () => {
+const EditStudent = (props) => {
   const studentContext = useContext(StudentContext);
   const alertContext = useContext(AlertContext);
 
@@ -18,10 +18,7 @@ const EditStudent = () => {
     email: '',
     alternateEmail: '',
     phone: '',
-    lessonSlot: '',
-    assignment: '',
     instrument: '',
-    attendance: '',
   });
 
   // populate the form with student data on edit button click
@@ -39,10 +36,7 @@ const EditStudent = () => {
         email: '',
         alternateEmail: '',
         phone: '',
-        lessonSlot: '',
-        assignment: '',
         instrument: '',
-        attendance: '',
       });
     }
   }, [studentContext, current]);
@@ -57,31 +51,32 @@ const EditStudent = () => {
     email,
     alternateEmail,
     phone,
-    lessonSlot,
-    assignment,
     instrument,
-    attendance,
   } = student;
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     // update student data
     if (current !== null) {
-      updateStudent(student);
+      await updateStudent(student);
       setAlert('Student Updated', 'success');
     }
     // set current back to null
     clearAll();
     // redirect back to home page after submit
-    // props.history.push('/');
+    props.history.push('/');
   };
 
   const onChange = (e) =>
     setStudent({ ...student, [e.target.name]: e.target.value });
 
-  // set lessonSlot state to date object from DatePicker
+  // // set lessonSlot state to date object from DatePicker
+  // const onChangeDate = (date) => {
+  //   setStudent({ ...student, lessonSlot: date });
+  // };
+
   const onChangeDate = (date) => {
-    setStudent({ ...student, lessonSlot: date });
+    setStudent({ ...student });
   };
 
   return (
@@ -95,20 +90,20 @@ const EditStudent = () => {
           value={name}
           onChange={onChange}
         />
-        <DatePicker
+        {/* <DatePicker
           placeholderText='Click to select a date and time'
           selected={lessonSlot}
           onChange={onChangeDate}
           showTimeSelect
           dateFormat='MMMM d, yyyy h:mm aa'
-        />
-        <input
+        /> */}
+        {/* <input
           type='text'
           placeholder='Assignment'
           name='assignment'
           value={assignment}
           onChange={onChange}
-        />
+        /> */}
         <input
           type='text'
           placeholder='Parent name'
@@ -155,15 +150,15 @@ const EditStudent = () => {
             onChange={onChange}
           />{' '}
           Guitar
-          <h5>Attendance</h5>
+          {/* <h5>Attendance</h5>
           <input
             type='radio'
             name='attendance'
             value='present'
             checked={attendance === 'present'}
             onChange={onChange}
-          />{' '}
-          Present{'  '}
+          />{' '} */}
+          {/* Present{'  '}
           <input
             type='radio'
             name='attendance'
@@ -179,7 +174,7 @@ const EditStudent = () => {
             checked={attendance === ''}
             onChange={onChange}
           />{' '}
-          None
+          None */}
         </div>
 
         <div>
