@@ -7,6 +7,9 @@ import CreateStudent from './components/students/CreateStudent';
 import EditStudent from './components/students/EditStudent';
 import Students from './components/students/Students';
 import Student from './components/students/Student';
+
+import Lessons from './components/lessons/Lessons';
+
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alerts from './components/layout/Alerts';
@@ -14,6 +17,7 @@ import './App.css';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 import StudentState from './context/student/StudentState';
+import LessonState from './context/lesson/LessonState';
 import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
 import setAuthToken from './utils/setAuthToken';
@@ -26,34 +30,41 @@ const App = () => {
   return (
     <AuthState>
       <StudentState>
-        <AlertState>
-          <Router>
-            <div className='App dark-palette'>
-              <Navbar />
-              <div className='container'>
-                <Alerts />
-                <Switch>
-                  <Route exact path='/about' component={About} />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/login' component={Login} />
-                  <PrivateRoute exact path='/' component={Home} />
-                  <PrivateRoute
-                    exact
-                    path='/create-student'
-                    component={CreateStudent}
-                  />
-                  <PrivateRoute
-                    exact
-                    path='/edit-student'
-                    component={EditStudent}
-                  />
-                  <PrivateRoute exact path='/students' component={Students} />
-                  <PrivateRoute exact path='/student/:id' component={Student} />
-                </Switch>
+        <LessonState>
+          <AlertState>
+            <Router>
+              <div className='App dark-palette'>
+                <Navbar />
+                <div className='container'>
+                  <Alerts />
+                  <Switch>
+                    <Route exact path='/about' component={About} />
+                    <Route exact path='/register' component={Register} />
+                    <Route exact path='/login' component={Login} />
+                    <PrivateRoute exact path='/' component={Home} />
+                    <PrivateRoute
+                      exact
+                      path='/create-student'
+                      component={CreateStudent}
+                    />
+                    <PrivateRoute
+                      exact
+                      path='/edit-student'
+                      component={EditStudent}
+                    />
+                    <PrivateRoute exact path='/students' component={Students} />
+                    <PrivateRoute
+                      exact
+                      path='/student/:id'
+                      component={Student}
+                    />
+                    <PrivateRoute exact path='/lessons' component={Lessons} />
+                  </Switch>
+                </div>
               </div>
-            </div>
-          </Router>
-        </AlertState>
+            </Router>
+          </AlertState>
+        </LessonState>
       </StudentState>
     </AuthState>
   );

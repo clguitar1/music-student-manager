@@ -3,6 +3,7 @@ import Students from '../students/Students';
 // import StudentForm from '../students/StudentForm';
 import StudentFilter from '../students/StudentFilter';
 import AuthContext from '../../context/auth/authContext';
+import Lessons from '../lessons/Lessons';
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -14,12 +15,10 @@ const Home = () => {
 
   return (
     <div className='Home'>
-      {/* <div>
-        <StudentForm />
-      </div> */}
       <div>
         <StudentFilter />
         <Students />
+        <Lessons />
       </div>
     </div>
   );
