@@ -99,10 +99,7 @@ router.put('/:id', auth, async (req, res) => {
       runValidators: true,
     });
 
-    res.status(200).json({
-      success: true,
-      data: lesson,
-    });
+    res.json(lesson);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

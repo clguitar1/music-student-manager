@@ -9,7 +9,7 @@ const CreateStudent = () => {
   const studentContext = useContext(StudentContext);
   const alertContext = useContext(AlertContext);
 
-  const { addStudent, current, clearCurrent, updateStudent } = studentContext;
+  const { addStudent, current, clearCurrent } = studentContext;
   const { setAlert } = alertContext;
 
   const [student, setStudent] = useState({

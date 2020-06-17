@@ -26,7 +26,7 @@ const EditStudent = (props) => {
     if (current !== null) {
       const newCurrent = {
         ...current,
-        lessonSlot: new Date(current.lessonSlot),
+        // lessonSlot: new Date(current.lessonSlot),
       };
       setStudent(newCurrent);
     } else {
@@ -180,7 +180,7 @@ const EditStudent = (props) => {
         <div>
           <input
             type='submit'
-            value={'Update Lesson'}
+            value={'Update Student'}
             className='btn btn-primary btn-block'
           />
         </div>

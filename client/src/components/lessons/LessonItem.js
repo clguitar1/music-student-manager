@@ -11,7 +11,14 @@ const LessonItem = ({ lesson }) => {
   const lessonContext = useContext(LessonContext);
   const alertContext = useContext(AlertContext);
 
-  const { lessons, filtered, getLessons, loading } = lessonContext;
+  const {
+    lessons,
+    filtered,
+    getLessons,
+    loading,
+    setCurrentLesson,
+    clearCurrentLesson,
+  } = lessonContext;
   const { setAlert } = alertContext;
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -21,14 +28,13 @@ const LessonItem = ({ lesson }) => {
   const onDelete = () => {
     // deleteStudent(_id);
     // setModalIsOpen(false);
-    // clearCurrent();
+    clearCurrentLesson();
     // setAlert('Student Deleted', 'danger');
     alert('Deleted Lesson!');
   };
 
   const onEdit = () => {
-    // setCurrent(student);
-    alert('Edited Lesson!');
+    setCurrentLesson(lesson);
   };
 
   return (
@@ -55,9 +61,12 @@ const LessonItem = ({ lesson }) => {
           <button onClick={() => setModalIsOpen(false)}>Cancel</button>
         </div>
       </Modal>
-      <h3 className='text-primary text-left'>{student.name} </h3>
+
       <ul className='list'>
-        <li>{moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}</li>
+        <li>
+          Lesson Slot: {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
+        </li>
+        <li>Student: {student.name} </li>
         <li>{attendance}</li>
         <li>{assignment}</li>
       </ul>
