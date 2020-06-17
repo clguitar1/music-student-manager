@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
-import CreateStudent from './components/students/CreateStudent';
-import EditStudent from './components/students/EditStudent';
+
 import Students from './components/students/Students';
 import Student from './components/students/Student';
+import CreateStudent from './components/students/CreateStudent';
+import EditStudent from './components/students/EditStudent';
 
 import Lessons from './components/lessons/Lessons';
+import Lesson from './components/lessons/Lesson';
 
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -42,6 +44,12 @@ const App = () => {
                     <Route exact path='/register' component={Register} />
                     <Route exact path='/login' component={Login} />
                     <PrivateRoute exact path='/' component={Home} />
+                    <PrivateRoute exact path='/students' component={Students} />
+                    <PrivateRoute
+                      exact
+                      path='/student/:id'
+                      component={Student}
+                    />
                     <PrivateRoute
                       exact
                       path='/create-student'
@@ -52,13 +60,8 @@ const App = () => {
                       path='/edit-student'
                       component={EditStudent}
                     />
-                    <PrivateRoute exact path='/students' component={Students} />
-                    <PrivateRoute
-                      exact
-                      path='/student/:id'
-                      component={Student}
-                    />
                     <PrivateRoute exact path='/lessons' component={Lessons} />
+                    <PrivateRoute exact path='/lesson/:id' component={Lesson} />
                   </Switch>
                 </div>
               </div>

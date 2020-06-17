@@ -27,7 +27,7 @@ const StudentState = (props) => {
 
   const [state, dispatch] = useReducer(studentReducer, initialState);
 
-  // Get all students
+  // Get all students and their lessons
   const getStudents = async () => {
     try {
       const res = await axios.get('/api/students');
@@ -39,15 +39,14 @@ const StudentState = (props) => {
   };
 
   // Get student by ID
-  const getStudentById = async (userId) => {
+  const getStudentById = async (studentId) => {
     try {
-      const res = await axios.get(`/api/students/${userId}`);
+      const res = await axios.get(`/api/students/${studentId}`);
 
       dispatch({
         type: GET_STUDENT,
         payload: res.data,
       });
-      console.log(res.data);
     } catch (err) {
       dispatch({ type: STUDENT_ERROR, payload: err.response.msg });
     }
@@ -83,7 +82,6 @@ const StudentState = (props) => {
 
   // Update student
   const updateStudent = async (student) => {
-    console.log(student);
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -96,7 +94,6 @@ const StudentState = (props) => {
         student,
         config
       );
-      console.log(res.data);
       dispatch({ type: UPDATE_STUDENT, payload: res.data });
     } catch (err) {
       dispatch({ type: STUDENT_ERROR, payload: err.response.msg });

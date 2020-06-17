@@ -1,14 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-// import PropTypes from 'prop-types';
 import StudentContext from '../../context/student/studentContext';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
-import moment from 'moment';
 import StudentLesson from './StudentLesson';
 
 const Student = ({ match }) => {
   const studentContext = useContext(StudentContext);
-  const { student, getStudentById, getStudents } = studentContext;
+  const { student, getStudentById } = studentContext;
 
   useEffect(() => {
     getStudentById(match.params.id);
@@ -17,6 +15,7 @@ const Student = ({ match }) => {
 
   return (
     <div className='Student card bg-light'>
+      <h1>Student Details</h1>
       {student !== null ? (
         <>
           <h2>{student.name}</h2>

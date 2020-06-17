@@ -19,7 +19,8 @@ const Lessons = () => {
 
   return (
     <div className='Lessons'>
-      {/* {lessons !== null && !loading ? (
+      <h1>Lessons</h1>
+      {lessons !== null && !loading ? (
         // map through live search results
         filtered !== null ? (
           filtered.map((lesson) => (
@@ -32,8 +33,7 @@ const Lessons = () => {
         )
       ) : (
         <Spinner />
-      )} */}
-      <h1>Lessons.js</h1>
+      )}
     </div>
   );
 };

@@ -27,31 +27,27 @@ router.get('/', auth, async (req, res) => {
 
     const lessons = await query;
 
-    res.status(200).json({
-      success: true,
-      count: lessons.length,
-      data: lessons,
-    });
+    // res.status(200).json({
+    //   success: true,
+    //   count: lessons.length,
+    //   data: lessons,
+    // });
+
+    res.json(lessons);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
   }
 });
 
-// @desc     Get single lesson
+// @desc     Get single lesson by its id
 // @route    GET /api/lessons/:id
 // @access   Private
 router.get('/:id', auth, async (req, res) => {
   try {
-    const lesson = await Lesson.findById(req.params.id).populate({
-      path: 'student',
-      select: 'assignment attendance lessonSlot student',
-    });
+    const lesson = await Lesson.findById(req.params.id).populate('student');
 
-    res.status(200).json({
-      success: true,
-      data: lesson,
-    });
+    res.json(lesson);
   } catch (err) {
     console.error(err.message);
     res.status(404).send(`No lesson with the id of ${req.params.id}`);

@@ -7,7 +7,7 @@ const User = require('../models/User');
 const Student = require('../models/Student');
 
 // @route    GET api/students
-// @desc     Get all user's students
+// @desc     Get all user's students and their lessons
 // @access   Private
 router.get('/', auth, async (req, res) => {
   try {
@@ -21,7 +21,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @desc     Get single student
+// @desc     Get single student and their lessons
 // @route    GET /api/students/:id
 // @access   Private
 router.get('/:id', auth, async (req, res) => {

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import moment from 'moment';
 import LessonContext from '../../context/lesson/lessonContext';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
@@ -54,9 +55,9 @@ const LessonItem = ({ lesson }) => {
           <button onClick={() => setModalIsOpen(false)}>Cancel</button>
         </div>
       </Modal>
-      <h3 className='text-primary text-left'>{student} </h3>
+      <h3 className='text-primary text-left'>{student.name} </h3>
       <ul className='list'>
-        <li>{lessonSlot}</li>
+        <li>{moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}</li>
         <li>{attendance}</li>
         <li>{assignment}</li>
       </ul>

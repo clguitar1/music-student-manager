@@ -5,14 +5,14 @@ import lessonReducer from './lessonReducer';
 import {
   GET_LESSONS,
   GET_LESSON,
-  ADD_LESSON,
-  DELETE_LESSON,
-  UPDATE_LESSON,
-  FILTER_LESSONS,
-  CLEAR_LESSONS,
-  SET_CURRENT,
-  CLEAR_CURRENT,
-  CLEAR_FILTER,
+  // ADD_LESSON,
+  // DELETE_LESSON,
+  // UPDATE_LESSON,
+  // FILTER_LESSONS,
+  // CLEAR_LESSONS,
+  // SET_CURRENT,
+  // CLEAR_CURRENT,
+  // CLEAR_FILTER,
   LESSON_ERROR,
 } from '../types';
 
@@ -28,13 +28,27 @@ const LessonState = (props) => {
   const [state, dispatch] = useReducer(lessonReducer, initialState);
 
   // Get all lessons
-  // api/lessons AND
-  // api/students/:studentId/lessons
+  // api/lessons
   const getLessons = async () => {
     try {
       const res = await axios.get('/api/lessons');
 
       dispatch({ type: GET_LESSONS, payload: res.data });
+      // console.log(res.data);
+    } catch (err) {
+      dispatch({ type: LESSON_ERROR, payload: err.response.msg });
+    }
+  };
+
+  // Get lesson by its ID
+  const getLessonById = async (lessonId) => {
+    try {
+      const res = await axios.get(`/api/lessons/${lessonId}`);
+
+      dispatch({
+        type: GET_LESSON,
+        payload: res.data,
+      });
     } catch (err) {
       dispatch({ type: LESSON_ERROR, payload: err.response.msg });
     }
@@ -49,6 +63,7 @@ const LessonState = (props) => {
         filtered: state.filtered,
         error: state.error,
         getLessons,
+        getLessonById,
       }}
     >
       {props.children}
