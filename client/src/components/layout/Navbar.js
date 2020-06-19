@@ -4,17 +4,21 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import AuthContext from '../../context/auth/authContext';
 import StudentContext from '../../context/student/studentContext';
+import LessonContext from '../../context/lesson/lessonContext';
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
   const studentContext = useContext(StudentContext);
+  const lessonContext = useContext(LessonContext);
 
   const { isAuthenticated, logout, user } = authContext;
   const { clearCurrent, clearStudents } = studentContext;
+  const { clearLessons } = lessonContext;
 
   const onLogout = () => {
     logout();
     clearStudents();
+    clearLessons();
   };
 
   const authLinks = (

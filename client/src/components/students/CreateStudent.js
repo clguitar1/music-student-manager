@@ -5,7 +5,7 @@ import StudentContext from '../../context/student/studentContext';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 
-const CreateStudent = () => {
+const CreateStudent = (props) => {
   const studentContext = useContext(StudentContext);
   const alertContext = useContext(AlertContext);
 
@@ -24,32 +24,32 @@ const CreateStudent = () => {
     // attendance: '',
   });
 
-  // populate the form with student data on edit button click
-  useEffect(() => {
-    if (current !== null) {
-      const newCurrent = {
-        ...current,
-        // lessonSlot: new Date(current.lessonSlot),
-      };
-      setStudent(newCurrent);
-    } else {
-      setStudent({
-        name: '',
-        parentName: '',
-        email: '',
-        alternateEmail: '',
-        phone: '',
-        // lessonSlot: '',
-        // assignment: '',
-        instrument: '',
-        // attendance: '',
-      });
-    }
-  }, [studentContext, current]);
+  // // populate the form with student data on edit button click
+  // useEffect(() => {
+  //   if (current !== null) {
+  //     const newCurrent = {
+  //       ...current,
+  //       // lessonSlot: new Date(current.lessonSlot),
+  //     };
+  //     setStudent(newCurrent);
+  //   } else {
+  //     setStudent({
+  //       name: '',
+  //       parentName: '',
+  //       email: '',
+  //       alternateEmail: '',
+  //       phone: '',
+  //       // lessonSlot: '',
+  //       // assignment: '',
+  //       instrument: '',
+  //       // attendance: '',
+  //     });
+  //   }
+  // }, [studentContext, current]);
 
-  const clearAll = () => {
-    clearCurrent();
-  };
+  // const clearAll = () => {
+  //   clearCurrent();
+  // };
 
   const {
     name,
@@ -70,17 +70,20 @@ const CreateStudent = () => {
       setAlert('Student Added', 'success');
     }
 
-    // clear the form
-    clearAll();
+    // // clear the form
+    // clearAll();
+
+    // redirect back to home page after submit
+    props.history.push('/');
   };
 
   const onChange = (e) =>
     setStudent({ ...student, [e.target.name]: e.target.value });
 
-  // set lessonSlot state to date object from DatePicker
-  const onChangeDate = (date) => {
-    setStudent({ ...student, lessonSlot: date });
-  };
+  // // set lessonSlot state to date object from DatePicker
+  // const onChangeDate = (date) => {
+  //   setStudent({ ...student, lessonSlot: date });
+  // };
 
   return (
     <div className='StudentForm'>
@@ -177,9 +180,9 @@ const CreateStudent = () => {
           />
         </div>
         <div>
-          <button className='btn btn-light btn-block' onClick={clearAll}>
+          {/* <button className='btn btn-light btn-block' onClick={clearAll}>
             Clear
-          </button>
+          </button> */}
         </div>
       </form>
       <Link className='btn btn-light' to='/'>

@@ -36,6 +36,10 @@ const StudentItem = ({ student }) => {
     setCurrent(student);
   };
 
+  const onNewLesson = () => {
+    setCurrent(student);
+  };
+
   return (
     <div className='StudentItem card bg-light'>
       <Modal
@@ -77,15 +81,10 @@ const StudentItem = ({ student }) => {
         </li>
       </ul>
       <p>
-        {/* <button className='btn btn-dark btn-sm' onClick={onEdit}>
-          Edit
-        </button> */}
         <Link onClick={onEdit} to='/edit-student' className='btn btn-dark mr-2'>
           Edit
         </Link>
-        {/* <button className='btn btn-danger btn-sm' onClick={onDelete}>
-          Delete
-        </button> */}
+
         <button
           className='btn btn-danger btn-sm'
           onClick={() => setModalIsOpen(true)}
@@ -93,7 +92,14 @@ const StudentItem = ({ student }) => {
           Delete
         </button>
         <Link to={`/student/${_id}`} className='btn btn-dark mr-2'>
-          View Student
+          Student's Lessons
+        </Link>
+        <Link
+          onClick={onNewLesson}
+          className='btn btn-dark'
+          to='/create-lesson'
+        >
+          New Lesson
         </Link>
       </p>
     </div>

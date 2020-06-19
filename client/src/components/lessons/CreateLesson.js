@@ -1,56 +1,46 @@
 import React, { useState, useContext, useEffect } from 'react';
+import StudentContext from '../../context/student/studentContext';
 import LessonContext from '../../context/lesson/lessonContext';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
-import moment from 'moment';
 
-const EditLesson = (props) => {
+const CreateLesson = (props) => {
+  const studentContext = useContext(StudentContext);
   const lessonContext = useContext(LessonContext);
+
   const alertContext = useContext(AlertContext);
 
-  const { current, clearCurrentLesson, updateLesson } = lessonContext;
+  const { setCurrent, current, clearCurrent } = studentContext;
+  const { addLesson, currentLesson, clearCurrentLesson } = lessonContext;
   const { setAlert } = alertContext;
 
   const [lesson, setLesson] = useState({
     lessonSlot: '',
-    attendance: '',
     assignment: '',
+    instrument: '',
+    attendance: '',
   });
-
-  const { lessonSlot, attendance, assignment } = lesson;
-
-  // populate the form with lesson data on edit button click
-  useEffect(() => {
-    if (current !== null) {
-      const newCurrent = {
-        ...current,
-        lessonSlot: new Date(current.lessonSlot),
-      };
-      setLesson(newCurrent);
-    } else {
-      setLesson({
-        lessonSlot: '',
-        attendance: '',
-        assignment: '',
-      });
-    }
-  }, [lessonContext, current]);
 
   const clearAll = () => {
     clearCurrentLesson();
+    clearCurrent();
   };
 
-  const onSubmit = async (e) => {
+  const { lessonSlot, assignment, instrument, attendance } = lesson;
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    // update lesson data
     if (current !== null) {
-      await updateLesson(lesson);
-      setAlert('Lesson Updated', 'success');
+      addLesson(lesson, current._id);
+      console.log(lesson, current._id);
+      setAlert('Lesson Added', 'success');
     }
-    // set current back to null
+
+    // clear the form
     clearAll();
+
     // redirect back to home page after submit
     props.history.push('/');
   };
@@ -66,17 +56,7 @@ const EditLesson = (props) => {
   return (
     <div className='LessonForm'>
       <form onSubmit={onSubmit}>
-        <h2 className='text-secondary'>
-          Edit {current.student.name}'s Lesson on{' '}
-          {moment(current.lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
-        </h2>
-        {/* <input
-          type='text'
-          placeholder='Student name'
-          name='name'
-          value={name}
-          onChange={onChange}
-        /> */}
+        <h2 className='text-secondary'>Add Lesson for {current.name}</h2>
         <DatePicker
           placeholderText='Click to select a date and time'
           selected={lessonSlot}
@@ -91,30 +71,44 @@ const EditLesson = (props) => {
           value={assignment}
           onChange={onChange}
         />
+        <h5>Instrument</h5>
+        <input
+          type='radio'
+          name='instrument'
+          value='violin'
+          checked={instrument === 'violin'}
+          onChange={onChange}
+        />{' '}
+        Violin{'  '}
+        <input
+          type='radio'
+          name='instrument'
+          value='guitar'
+          checked={instrument === 'guitar'}
+          onChange={onChange}
+        />{' '}
+        Guitar
         <h5>Attendance</h5>
-        <div className='radio'>
-          <input
-            type='radio'
-            name='attendance'
-            value='present'
-            checked={attendance === 'present'}
-            onChange={onChange}
-          />{' '}
-          Present{'  '}
-          <input
-            type='radio'
-            name='attendance'
-            value='absent'
-            checked={attendance === 'absent'}
-            onChange={onChange}
-          />{' '}
-          Absent
-        </div>
-
+        <input
+          type='radio'
+          name='attendance'
+          value='present'
+          checked={attendance === 'present'}
+          onChange={onChange}
+        />{' '}
+        Present{'  '}
+        <input
+          type='radio'
+          name='attendance'
+          value='absent'
+          checked={attendance === 'absent'}
+          onChange={onChange}
+        />{' '}
+        Absent
         <div>
           <input
             type='submit'
-            value={'Update Lesson'}
+            value={'Add Lesson'}
             className='btn btn-primary btn-block'
           />
         </div>
@@ -124,11 +118,11 @@ const EditLesson = (props) => {
           </button>
         </div>
       </form>
-      <Link onClick={clearAll} className='btn btn-light' to='/'>
+      <Link onClick={clearCurrent} className='btn btn-light' to='/'>
         Back
       </Link>
     </div>
   );
 };
 
-export default EditLesson;
+export default CreateLesson;

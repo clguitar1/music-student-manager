@@ -16,6 +16,8 @@ const LessonItem = ({ lesson }) => {
     filtered,
     getLessons,
     loading,
+    addLesson,
+    deleteLesson,
     setCurrentLesson,
     clearCurrentLesson,
   } = lessonContext;
@@ -26,11 +28,10 @@ const LessonItem = ({ lesson }) => {
   const { _id, assignment, attendance, lessonSlot, student } = lesson;
 
   const onDelete = () => {
-    // deleteStudent(_id);
-    // setModalIsOpen(false);
+    deleteLesson(_id);
+    setModalIsOpen(false);
     clearCurrentLesson();
-    // setAlert('Student Deleted', 'danger');
-    alert('Deleted Lesson!');
+    setAlert('Lesson Deleted', 'danger');
   };
 
   const onEdit = () => {

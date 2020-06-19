@@ -15,10 +15,9 @@ const Student = ({ match }) => {
 
   return (
     <div className='Student card bg-light'>
-      <h1>Student Details</h1>
       {student !== null ? (
         <>
-          <h2>{student.name}</h2>
+          <h1>{student.name}'s Lessons</h1>
           <ul className='list'>
             {student.lessons.map((lesson) => (
               <>

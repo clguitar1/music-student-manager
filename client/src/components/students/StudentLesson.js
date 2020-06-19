@@ -7,7 +7,6 @@ const StudentLesson = ({ lesson }) => {
   const { assignment, attendance, lessonSlot, student } = lesson;
   return (
     <>
-      <li key={uuidv4()}>{assignment}</li>
       <li key={uuidv4()}>
         {attendance && (
           <span
@@ -25,6 +24,7 @@ const StudentLesson = ({ lesson }) => {
         <i className='fas fa-calendar-alt'></i>{' '}
         {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
       </li>
+      <li key={uuidv4()}>Homework: {assignment}</li>
     </>
   );
 };

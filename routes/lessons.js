@@ -66,10 +66,7 @@ router.post('/', auth, async (req, res) => {
 
     const lesson = await Lesson.create(req.body);
 
-    res.status(200).json({
-      success: true,
-      data: lesson,
-    });
+    res.json(lesson);
   } catch (err) {
     console.error(err.message);
     res.status(404).send(`No student with the id of ${req.params.studentId}`);
@@ -130,6 +127,7 @@ router.delete('/:id', auth, async (req, res) => {
     res.status(200).json({
       success: true,
       data: {},
+      msg: 'Lesson removed',
     });
   } catch (err) {
     console.error(err.message);

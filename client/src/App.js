@@ -12,6 +12,7 @@ import EditStudent from './components/students/EditStudent';
 import Lessons from './components/lessons/Lessons';
 import Lesson from './components/lessons/Lesson';
 import EditLesson from './components/lessons/EditLesson';
+import CreateLesson from './components/lessons/CreateLesson';
 
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -67,6 +68,11 @@ const App = () => {
                       exact
                       path='/edit-lesson'
                       component={EditLesson}
+                    />
+                    <PrivateRoute
+                      exact
+                      path='/create-lesson'
+                      component={CreateLesson}
                     />
                   </Switch>
                 </div>

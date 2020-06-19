@@ -100,7 +100,7 @@ const StudentState = (props) => {
     }
   };
 
-  // Clear students
+  // Clear students - on logout don't show any students
   const clearStudents = () => {
     dispatch({ type: CLEAR_STUDENTS });
   };
