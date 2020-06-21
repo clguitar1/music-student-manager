@@ -10,7 +10,7 @@ const EditLesson = (props) => {
   const lessonContext = useContext(LessonContext);
   const alertContext = useContext(AlertContext);
 
-  const { current, clearCurrentLesson, updateLesson } = lessonContext;
+  const { currentLesson, clearCurrentLesson, updateLesson } = lessonContext;
   const { setAlert } = alertContext;
 
   const [lesson, setLesson] = useState({
@@ -19,14 +19,14 @@ const EditLesson = (props) => {
     assignment: '',
   });
 
-  const { lessonSlot, attendance, assignment } = lesson;
+  const { assignment, attendance, lessonSlot } = lesson;
 
   // populate the form with lesson data on edit button click
   useEffect(() => {
-    if (current !== null) {
+    if (currentLesson !== null) {
       const newCurrent = {
-        ...current,
-        lessonSlot: new Date(current.lessonSlot),
+        ...currentLesson,
+        lessonSlot: new Date(currentLesson.lessonSlot),
       };
       setLesson(newCurrent);
     } else {
@@ -36,7 +36,7 @@ const EditLesson = (props) => {
         assignment: '',
       });
     }
-  }, [lessonContext, current]);
+  }, [lessonContext, currentLesson]);
 
   const clearAll = () => {
     clearCurrentLesson();
@@ -45,12 +45,12 @@ const EditLesson = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     // update lesson data
-    if (current !== null) {
+    if (currentLesson !== null) {
       await updateLesson(lesson);
       setAlert('Lesson Updated', 'success');
     }
-    // set current back to null
-    clearAll();
+    // // set currentLesson back to null
+    // clearAll();
     // redirect back to home page after submit
     props.history.push('/');
   };
@@ -67,8 +67,8 @@ const EditLesson = (props) => {
     <div className='LessonForm'>
       <form onSubmit={onSubmit}>
         <h2 className='text-secondary'>
-          Edit {current.student.name}'s Lesson on{' '}
-          {moment(current.lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
+          Edit {currentLesson.student.name}'s Lesson for{' '}
+          {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
         </h2>
         {/* <input
           type='text'

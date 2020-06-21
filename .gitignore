@@ -1,5 +1,9 @@
 node_modules/
 
+_data/
+
+seeder.js
+
 /client/build
 
 /client/.env.local

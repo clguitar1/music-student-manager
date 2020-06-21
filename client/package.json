@@ -7,7 +7,9 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
     "moment": "^2.25.3",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1",
@@ -15,6 +17,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0",
+    "reactstrap": "^8.4.1",
     "uuid": "^8.0.0",
     "websocket-extensions": "^0.1.4"
   },

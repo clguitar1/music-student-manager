@@ -34,6 +34,7 @@ const LessonItem = ({ lesson }) => {
     setAlert('Lesson Deleted', 'danger');
   };
 
+  // send lesson data to context state to populate the form in EditLesson.js
   const onEdit = () => {
     setCurrentLesson(lesson);
   };

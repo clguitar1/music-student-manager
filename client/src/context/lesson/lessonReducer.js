@@ -54,19 +54,19 @@ export default (state, action) => {
         ...state,
         lesson: null,
         lessons: null,
-        current: null,
+        currentLesson: null,
         filtered: null,
         error: null,
       };
     case SET_CURRENT_LESSON:
       return {
         ...state,
-        current: action.payload,
+        currentLesson: action.payload,
       };
     case CLEAR_CURRENT_LESSON:
       return {
         ...state,
-        current: null,
+        currentLesson: null,
       };
     default:
       return state;

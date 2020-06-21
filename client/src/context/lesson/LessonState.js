@@ -107,7 +107,7 @@ const LessonState = (props) => {
     dispatch({ type: CLEAR_LESSONS });
   };
 
-  // Set current lesson in state.current with the edit button
+  // Set current lesson in state.currentLesson with the edit button
   const setCurrentLesson = (lesson) => {
     dispatch({ type: SET_CURRENT_LESSON, payload: lesson });
   };

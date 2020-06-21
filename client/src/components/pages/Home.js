@@ -16,6 +16,7 @@ const Home = () => {
   return (
     <div className='Home'>
       <div>
+        <h1>Students</h1>
         <StudentFilter />
         <Students />
         <Lessons />
