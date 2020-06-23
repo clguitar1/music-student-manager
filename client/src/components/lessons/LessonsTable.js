@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import LessonItem from './LessonItem';
 import LessonContext from '../../context/lesson/lessonContext';
+import LessonTableData from './LessonTableData';
 import Spinner from '../layout/Spinner';
 
-const Lessons = () => {
+const LessonsTable = () => {
   const lessonContext = useContext(LessonContext);
   const { lessons, filtered, getLessons, loading } = lessonContext;
 
@@ -18,32 +18,41 @@ const Lessons = () => {
   }
 
   return (
-    <div className='Lessons'>
-      <div class='DashboardTest container-fluid'>
-        <div class='row'>
-          <main role='main' class='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
-            <div class='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom'>
-              <h1>Lessons</h1>
-            </div>
+    <div className='LessonsTable'>
+      <h2>
+        <i class='fas fa-music'></i> Lessons
+      </h2>
+      <div class='table-responsive'>
+        <table class='table table-striped table-sm'>
+          <thead>
+            <tr>
+              <th>Lesson Slot</th>
+              <th>Student Name</th>
+              <th>Assignment</th>
+              <th>Attendance</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
             {lessons !== null && !loading ? (
               // map through live search results
               filtered !== null ? (
                 filtered.map((lesson) => (
-                  <LessonItem key={lesson._id} lesson={lesson} />
+                  <LessonTableData key={lesson._id} lesson={lesson} />
                 ))
               ) : (
                 lessons.map((lesson) => (
-                  <LessonItem key={lesson._id} lesson={lesson} />
+                  <LessonTableData key={lesson._id} lesson={lesson} />
                 ))
               )
             ) : (
               <Spinner />
             )}
-          </main>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 };
 
-export default Lessons;
+export default LessonsTable;

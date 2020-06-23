@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import StudentContext from '../../context/student/studentContext';
 // import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+// import 'react-datepicker/dist/react-datepicker.css';
+import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 
@@ -9,7 +10,15 @@ const EditStudent = (props) => {
   const studentContext = useContext(StudentContext);
   const alertContext = useContext(AlertContext);
 
-  const { current, clearCurrent, updateStudent } = studentContext;
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const {
+    deleteStudent,
+    setCurrent,
+    current,
+    clearCurrent,
+    updateStudent,
+  } = studentContext;
   const { setAlert } = alertContext;
 
   const [student, setStudent] = useState({
@@ -41,11 +50,8 @@ const EditStudent = (props) => {
     }
   }, [studentContext, current]);
 
-  const clearAll = () => {
-    clearCurrent();
-  };
-
   const {
+    _id,
     name,
     parentName,
     email,
@@ -53,6 +59,23 @@ const EditStudent = (props) => {
     phone,
     instrument,
   } = student;
+
+  const onDelete = () => {
+    deleteStudent(_id);
+    setModalIsOpen(false);
+    clearCurrent();
+    // redirect back to home page after submit
+    props.history.push('/dashboard');
+    setAlert('Student Deleted', 'danger');
+  };
+
+  const onNewLesson = () => {
+    setCurrent(student);
+  };
+
+  const clearAll = () => {
+    clearCurrent();
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -64,7 +87,7 @@ const EditStudent = (props) => {
     // set current back to null
     clearAll();
     // redirect back to home page after submit
-    props.history.push('/');
+    props.history.push('/dashboard');
   };
 
   const onChange = (e) =>
@@ -75,14 +98,37 @@ const EditStudent = (props) => {
   //   setStudent({ ...student, lessonSlot: date });
   // };
 
-  const onChangeDate = (date) => {
-    setStudent({ ...student });
-  };
+  // const onChangeDate = (date) => {
+  //   setStudent({ ...student });
+  // };
 
   return (
     <div className='StudentForm'>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(128,128,128,0.3)',
+          },
+          content: {
+            top: '102px',
+            left: '103px',
+            right: '103px',
+            bottom: '275px',
+          },
+        }}
+      >
+        <h2>Are you sure you want to delete this student and their lessons?</h2>
+        <p>This action cannot be undone</p>
+        <div>
+          <button onClick={onDelete}>Delete Student</button>
+          <button onClick={() => setModalIsOpen(false)}>Cancel</button>
+        </div>
+      </Modal>
+
       <form onSubmit={onSubmit}>
-        <h2 className='text-secondary'>Edit Student</h2>
+        <h2 className='text-secondary'>Student Details</h2>
         <input
           type='text'
           placeholder='Student name'
@@ -90,20 +136,6 @@ const EditStudent = (props) => {
           value={name}
           onChange={onChange}
         />
-        {/* <DatePicker
-          placeholderText='Click to select a date and time'
-          selected={lessonSlot}
-          onChange={onChangeDate}
-          showTimeSelect
-          dateFormat='MMMM d, yyyy h:mm aa'
-        /> */}
-        {/* <input
-          type='text'
-          placeholder='Assignment'
-          name='assignment'
-          value={assignment}
-          onChange={onChange}
-        /> */}
         <input
           type='text'
           placeholder='Parent name'
@@ -184,13 +216,22 @@ const EditStudent = (props) => {
             className='btn btn-primary btn-block'
           />
         </div>
-        <div>
+        {/* <div>
           <button className='btn btn-light btn-block' onClick={clearAll}>
             Clear
           </button>
-        </div>
+        </div> */}
       </form>
-      <Link onClick={clearAll} className='btn btn-light' to='/'>
+      <Link onClick={onNewLesson} className='btn btn-dark' to='/create-lesson'>
+        New Lesson
+      </Link>
+      <button
+        className='btn btn-danger btn-sm'
+        onClick={() => setModalIsOpen(true)}
+      >
+        Delete Student
+      </button>
+      <Link onClick={clearAll} className='btn btn-light' to='/dashboard'>
         Back
       </Link>
     </div>

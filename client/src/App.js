@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
+import NavbarComponent from './components/layout/NavbarComponent';
+import NavbarTestComponent from './components/layout/NavbarTestComponent';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
+import Landing from './components/pages/Landing';
+import DashboardTest from './components/pages/DashboardTest';
 
 import Students from './components/students/Students';
 import Student from './components/students/Student';
@@ -16,8 +19,8 @@ import CreateLesson from './components/lessons/CreateLesson';
 
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import Alerts from './components/layout/Alerts';
-import './App.css';
+// import Alerts from './components/layout/Alerts';
+// import './App.css';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 import StudentState from './context/student/StudentState';
@@ -37,15 +40,21 @@ const App = () => {
         <LessonState>
           <AlertState>
             <Router>
-              <div className='App dark-palette'>
-                <Navbar />
+              <div className='App'>
+                {/* <NavbarComponent /> */}
+                <NavbarTestComponent />
                 <div className='container'>
-                  <Alerts />
                   <Switch>
+                    <Route
+                      exact
+                      path='/dashboard-test'
+                      component={DashboardTest}
+                    />
+                    <Route exact path='/' component={Landing} />
                     <Route exact path='/about' component={About} />
                     <Route exact path='/register' component={Register} />
                     <Route exact path='/login' component={Login} />
-                    <PrivateRoute exact path='/' component={Home} />
+                    <PrivateRoute exact path='/dashboard' component={Home} />
                     <PrivateRoute exact path='/students' component={Students} />
                     <PrivateRoute
                       exact

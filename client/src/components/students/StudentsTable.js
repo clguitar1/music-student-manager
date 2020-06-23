@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import StudentItem from './StudentItem';
 import StudentContext from '../../context/student/studentContext';
+import StudentTableData from './StudentTableData';
 import Spinner from '../layout/Spinner';
 
-const Students = () => {
+const StudentsTable = () => {
   const studentContext = useContext(StudentContext);
   const { students, filtered, getStudents, loading } = studentContext;
 
@@ -18,32 +18,43 @@ const Students = () => {
   }
 
   return (
-    <div className='Students'>
-      <div class='DashboardTest container-fluid'>
-        <div class='row'>
-          <main role='main' class='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
-            <div class='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom'>
-              <h1>Students</h1>
-            </div>
+    <div className='StudentsTable'>
+      <h2>
+        <i class='fas fa-users'></i> Students
+      </h2>
+      <div class='table-responsive'>
+        <table class='table table-striped table-sm'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Instrument</th>
+              <th>Parent</th>
+              <th>Email</th>
+              <th>Alt. Email</th>
+              <th>Phone</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
             {students !== null && !loading ? (
               // map through live search results
               filtered !== null ? (
                 filtered.map((student) => (
-                  <StudentItem key={student._id} student={student} />
+                  <StudentTableData key={student._id} student={student} />
                 ))
               ) : (
                 students.map((student) => (
-                  <StudentItem key={student._id} student={student} />
+                  <StudentTableData key={student._id} student={student} />
                 ))
               )
             ) : (
               <Spinner />
             )}
-          </main>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 };
 
-export default Students;
+export default StudentsTable;

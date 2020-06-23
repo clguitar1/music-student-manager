@@ -52,7 +52,7 @@ const EditLesson = (props) => {
     // // set currentLesson back to null
     // clearAll();
     // redirect back to home page after submit
-    props.history.push('/');
+    props.history.push('/dashboard');
   };
 
   const onChange = (e) =>
@@ -118,13 +118,13 @@ const EditLesson = (props) => {
             className='btn btn-primary btn-block'
           />
         </div>
-        <div>
+        {/* <div>
           <button className='btn btn-light btn-block' onClick={clearAll}>
             Clear
           </button>
-        </div>
+        </div> */}
       </form>
-      <Link onClick={clearAll} className='btn btn-light' to='/'>
+      <Link onClick={clearAll} className='btn btn-light' to='/dashboard'>
         Back
       </Link>
     </div>

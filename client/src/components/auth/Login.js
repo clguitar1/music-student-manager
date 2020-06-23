@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -13,7 +14,7 @@ const Login = (props) => {
   useEffect(() => {
     if (isAuthenticated) {
       // redirect to the dashboard page, Home.js
-      props.history.push('/');
+      props.history.push('/dashboard');
     }
 
     if (error === 'Invalid credentials') {
@@ -66,6 +67,12 @@ const Login = (props) => {
           className='btn btn-primary btn-block'
         />
       </form>
+      <p className='mt-2'>
+        Need an account?{' '}
+        <Link to='/register' className='text-info'>
+          Sign Up
+        </Link>
+      </p>
     </div>
   );
 };

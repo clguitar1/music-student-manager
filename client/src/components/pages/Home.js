@@ -4,6 +4,7 @@ import Students from '../students/Students';
 import StudentFilter from '../students/StudentFilter';
 import AuthContext from '../../context/auth/authContext';
 import Lessons from '../lessons/Lessons';
+import DashboardTest from './DashboardTest';
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -15,12 +16,7 @@ const Home = () => {
 
   return (
     <div className='Home'>
-      <div>
-        <h1>Students</h1>
-        <StudentFilter />
-        <Students />
-        <Lessons />
-      </div>
+      <DashboardTest />
     </div>
   );
 };

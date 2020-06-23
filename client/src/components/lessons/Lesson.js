@@ -35,7 +35,7 @@ const Lesson = ({ match }) => {
       ) : (
         <Spinner />
       )}
-      <Link className='btn btn-dark' to='/'>
+      <Link className='btn btn-dark' to='/dashboard'>
         Back
       </Link>
     </div>

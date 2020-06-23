@@ -42,7 +42,7 @@ const CreateLesson = (props) => {
     clearAll();
 
     // redirect back to home page after submit
-    props.history.push('/');
+    props.history.push('/dashboard');
   };
 
   const onChange = (e) =>
@@ -118,7 +118,7 @@ const CreateLesson = (props) => {
           </button>
         </div>
       </form>
-      <Link onClick={clearCurrent} className='btn btn-light' to='/'>
+      <Link onClick={clearCurrent} className='btn btn-light' to='/dashboard'>
         Back
       </Link>
     </div>

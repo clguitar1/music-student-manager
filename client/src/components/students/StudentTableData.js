@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 
 Modal.setAppElement('#root');
-const StudentItem = ({ student }) => {
+const StudentTableData = ({ student }) => {
   const studentContext = useContext(StudentContext);
   const alertContext = useContext(AlertContext);
 
@@ -32,6 +32,7 @@ const StudentItem = ({ student }) => {
     setAlert('Student Deleted', 'danger');
   };
 
+  // send student data to context state to populate the form in EditStudent.js
   const onEdit = () => {
     setCurrent(student);
   };
@@ -41,7 +42,7 @@ const StudentItem = ({ student }) => {
   };
 
   return (
-    <div className='StudentItem card bg-light'>
+    <tr>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
@@ -64,50 +65,46 @@ const StudentItem = ({ student }) => {
           <button onClick={() => setModalIsOpen(false)}>Cancel</button>
         </div>
       </Modal>
-      <h3 className='text-primary text-left'>{name} </h3>
-      <ul className='list'>
-        <li>{instrument}</li>
-        <li>Parent: {parentName}</li>
-        <li>
-          <i className='fas fa-envelope-open'></i> {email}
-        </li>
-        {alternateEmail && (
-          <li>
-            <i className='fas fa-envelope-open'></i> {alternateEmail}
-          </li>
-        )}
-        <li>
-          <i className='fas fa-phone'></i> {phone}
-        </li>
-      </ul>
-      <p>
-        <Link onClick={onEdit} to='/edit-student' className='btn btn-dark mr-2'>
-          Edit
-        </Link>
 
-        <button
-          className='btn btn-danger btn-sm'
-          onClick={() => setModalIsOpen(true)}
-        >
-          Delete
-        </button>
-        <Link to={`/student/${_id}`} className='btn btn-dark mr-2'>
-          Lessons
-        </Link>
-        <Link
-          onClick={onNewLesson}
-          className='btn btn-dark'
-          to='/create-lesson'
-        >
-          New Lesson
-        </Link>
-      </p>
-    </div>
+      <td>{name}</td>
+      <td>{instrument}</td>
+      <td>{parentName}</td>
+      <td>{email}</td>
+      <td>{alternateEmail}</td>
+      <td>{phone}</td>
+      <td>
+        <div className='btn-group' role='group' aria-label='3 buttons'>
+          <Link
+            onClick={onEdit}
+            to='/edit-student'
+            className='btn btn-secondary'
+          >
+            <i class='fas fa-search'></i>
+          </Link>
+          {/* <button
+            className='btn btn-danger btn-sm'
+            onClick={() => setModalIsOpen(true)}
+          >
+            Delete
+          </button>
+          <Link to={`/student/${_id}`} className='btn btn-secondary'>
+            Lessons
+          </Link>
+          <Link
+            onClick={onNewLesson}
+            className='btn btn-secondary'
+            to='/create-lesson'
+          >
+            New Lesson
+          </Link> */}
+        </div>
+      </td>
+    </tr>
   );
 };
 
-StudentItem.propTypes = {
+StudentTableData.propTypes = {
   student: PropTypes.object.isRequired,
 };
 
-export default StudentItem;
+export default StudentTableData;
