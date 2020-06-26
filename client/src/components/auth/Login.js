@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './Auth.css';
+
 import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
-import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import Alerts from '../layout/Alerts';
 
 const Login = (props) => {
   const authContext = useContext(AuthContext);
@@ -35,44 +37,56 @@ const Login = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // check all fields are complete
     if (email === '' || password === '') {
       setAlert('Please fill in all fields', 'danger');
+      // check for valid email format
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      setAlert('Please enter a valid email', 'danger');
     } else {
       login({ email, password });
     }
   };
 
   return (
-    <div className='Login form-container'>
-      <h1>
-        Account <span className=''>Login</span>
-      </h1>
-      <form onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='email'>Email</label>
-          <input type='email' name='email' value={email} onChange={onChange} />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            name='password'
-            value={password}
-            onChange={onChange}
-          />
-        </div>
+    <div className='Login text-center'>
+      <form className='form-signin' onSubmit={onSubmit}>
+        <Alerts />
+        <h1 className='h3 mb-3 font-weight-normal'>Account Login</h1>
+        <label className='sr-only' htmlFor='email'>
+          Email
+        </label>
         <input
-          type='submit'
-          value='Login'
-          className='btn btn-primary btn-block'
+          type='email'
+          name='email'
+          className='form-control'
+          placeholder='Email address'
+          value={email}
+          onChange={onChange}
         />
+
+        <label className='sr-only' htmlFor='password'>
+          Password
+        </label>
+        <input
+          type='password'
+          name='password'
+          className='form-control'
+          placeholder='Password'
+          value={password}
+          onChange={onChange}
+        />
+
+        <button type='submit' className='btn btn-lg btn-primary btn-block'>
+          Log in
+        </button>
+        <p className='mt-2'>
+          Need an account?{' '}
+          <Link to='/register' className='text-info'>
+            Sign Up
+          </Link>
+        </p>
       </form>
-      <p className='mt-2'>
-        Need an account?{' '}
-        <Link to='/register' className='text-info'>
-          Sign Up
-        </Link>
-      </p>
     </div>
   );
 };

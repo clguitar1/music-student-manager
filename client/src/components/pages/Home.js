@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import Students from '../students/Students';
-// import StudentForm from '../students/StudentForm';
-import StudentFilter from '../students/StudentFilter';
+// import Students from '../students/Students';
+// import StudentFilter from '../students/StudentFilter';
 import AuthContext from '../../context/auth/authContext';
-import Lessons from '../lessons/Lessons';
-import DashboardTest from './DashboardTest';
+// import Lessons from '../lessons/Lessons';
+import Dashboard from './Dashboard';
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -16,7 +15,7 @@ const Home = () => {
 
   return (
     <div className='Home'>
-      <DashboardTest />
+      <Dashboard />
     </div>
   );
 };

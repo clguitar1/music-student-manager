@@ -20,10 +20,10 @@ const LessonsTable = () => {
   return (
     <div className='LessonsTable'>
       <h2>
-        <i class='fas fa-music'></i> Lessons
+        <i className='fas fa-music'></i> Lessons
       </h2>
-      <div class='table-responsive'>
-        <table class='table table-striped table-sm'>
+      <div className='table-responsive'>
+        <table className='table table-striped table-sm'>
           <thead>
             <tr>
               <th>Lesson Slot</th>

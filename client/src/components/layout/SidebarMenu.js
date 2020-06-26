@@ -6,23 +6,23 @@ const SidebarMenu = () => {
     <div className='SidebarMenu'>
       <nav
         id='sidebarMenu'
-        class='col-md-3 col-lg-2 d-md-block bg-light sidebar collapse'
+        className='col-md-3 col-lg-2 d-md-block bg-light sidebar collapse'
       >
-        <div class='sidebar-sticky pt-3'>
-          <ul class='nav flex-column'>
-            <li class='nav-item'>
-              <Link class='nav-link' to='/dashboard'>
-                <i class='fas fa-home'></i> Dashboard
+        <div className='sidebar-sticky pt-3'>
+          <ul className='nav flex-column'>
+            <li className='nav-item'>
+              <Link className='nav-link' to='/dashboard'>
+                <i className='fas fa-home'></i> Dashboard
               </Link>
             </li>
-            <li class='nav-item'>
-              <Link class='nav-link' to='/students'>
-                <i class='fas fa-users'></i> Students
+            <li className='nav-item'>
+              <Link className='nav-link' to='/students'>
+                <i className='fas fa-users'></i> Students
               </Link>
             </li>
-            <li class='nav-item'>
-              <Link class='nav-link' to='/lessons'>
-                <i class='fas fa-music'></i> Lessons
+            <li className='nav-item'>
+              <Link className='nav-link' to='/lessons'>
+                <i className='fas fa-music'></i> Lessons
               </Link>
             </li>
           </ul>

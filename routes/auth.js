@@ -8,12 +8,13 @@ const User = require('../models/User');
 const auth = require('../middleware/authMiddleware');
 
 // @route    GET api/auth
-// @desc     Get logged in user
+// @desc     Get logged in user to allow access to protected routes
 // @access   Private
 router.get('/', auth, async (req, res) => {
   try {
+    // if the user exists, send back the user data
     const user = await User.findById(req.user.id).select('-password');
-    // send back the user data
+
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -41,23 +42,26 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      // check for existing user and matching password
+      // check for existing user
       let user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).jaon({ msg: 'Invalide credentials' });
+        return res.status(400).json({ msg: 'Invalid credentials' });
       }
+
+      // if there is an existing user check for matching password
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return res.status(400).json({ msg: 'Invalid credentials' });
       }
 
-      // if there is an existing user with matching password, send a jsonwebtoken
+      // if there is an existing user with matching password, get the user id to pass into sign()
       const payload = {
         user: {
           id: user.id,
         },
       };
 
+      // generate a token passing in the user id as payload and jwtSecret constant
       jwt.sign(
         payload,
         config.get('jwtSecret'),

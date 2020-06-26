@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import SidebarMenu from './SidebarMenu';
@@ -13,7 +13,7 @@ const NavbarTestComponent = ({ title, icon }) => {
   const lessonContext = useContext(LessonContext);
 
   const { isAuthenticated, logout, user } = authContext;
-  const { clearCurrent, clearStudents } = studentContext;
+  const { clearStudents } = studentContext;
   const { clearLessons } = lessonContext;
 
   const onLogout = () => {
@@ -23,12 +23,12 @@ const NavbarTestComponent = ({ title, icon }) => {
   };
 
   const authLinks = (
-    <nav class='navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow'>
-      <a class='navbar-brand col-md-3 col-lg-2 mr-0 px-3' href='#'>
+    <nav className='navbar navbar-expand-lg navbar-dark bg-dark sticky-top '>
+      <a className='navbar-brand col-md-3 col-lg-2 mr-0 px-3' href='#!'>
         <i className={icon}></i> {title}
       </a>
       <button
-        class='navbar-toggler position-absolute d-md-none collapsed'
+        className='navbar-toggler position-absolute d-md-none collapsed'
         type='button'
         data-toggle='collapse'
         data-target='#sidebarMenu'
@@ -36,12 +36,13 @@ const NavbarTestComponent = ({ title, icon }) => {
         aria-expanded='false'
         aria-label='Toggle navigation'
       >
-        <span class='navbar-toggler-icon'></span>
+        <span className='navbar-toggler-icon'></span>
       </button>
 
-      <ul class='navbar-nav px-3'>
-        <li class='nav-item text-nowrap'>
-          <a onClick={onLogout} class='nav-link' href='#!'>
+      <ul className='navbar-nav ml-auto px-3'>
+        <li className='nav-link text-nowrap'>Hello {user && user.name}</li>
+        <li className='nav-item text-nowrap'>
+          <a onClick={onLogout} className='nav-link' href='#!'>
             <i className='fas fa-sign-out-alt'></i> Sign out
           </a>
         </li>
@@ -50,12 +51,12 @@ const NavbarTestComponent = ({ title, icon }) => {
   );
 
   const guestLinks = (
-    <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-      <a class='navbar-brand' href='/'>
+    <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
+      <a className='navbar-brand' href='/'>
         <i className={icon}></i> {title}
       </a>
       <button
-        class='navbar-toggler'
+        className='navbar-toggler'
         type='button'
         data-toggle='collapse'
         data-target='#navbarSupportedContent'
@@ -63,17 +64,17 @@ const NavbarTestComponent = ({ title, icon }) => {
         aria-expanded='false'
         aria-label='Toggle navigation'
       >
-        <span class='navbar-toggler-icon'></span>
+        <span className='navbar-toggler-icon'></span>
       </button>
-      <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-        <ul class='navbar-nav ml-auto'>
-          <li class='nav-item'>
-            <Link class='nav-link' to='/register'>
+      <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+        <ul className='navbar-nav ml-auto'>
+          <li className='nav-item'>
+            <Link className='nav-link' to='/register'>
               Sign Up
             </Link>
           </li>
-          <li class='nav-item'>
-            <Link class='nav-link' to='login'>
+          <li className='nav-item'>
+            <Link className='nav-link' to='login'>
               Login
             </Link>
           </li>
@@ -88,6 +89,10 @@ const NavbarTestComponent = ({ title, icon }) => {
       {isAuthenticated && <SidebarMenu />}
     </div>
   );
+};
+
+NavbarTestComponent.propTypes = {
+  title: PropTypes.string,
 };
 
 NavbarTestComponent.defaultProps = {

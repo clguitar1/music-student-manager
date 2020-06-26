@@ -20,10 +20,10 @@ const StudentsTable = () => {
   return (
     <div className='StudentsTable'>
       <h2>
-        <i class='fas fa-users'></i> Students
+        <i className='fas fa-users'></i> Students
       </h2>
-      <div class='table-responsive'>
-        <table class='table table-striped table-sm'>
+      <div className='table-responsive'>
+        <table className='table table-striped table-sm'>
           <thead>
             <tr>
               <th>Name</th>

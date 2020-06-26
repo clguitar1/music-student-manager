@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import NavbarComponent from './components/layout/NavbarComponent';
+// import NavbarComponent from './components/layout/NavbarComponent';
 import NavbarTestComponent from './components/layout/NavbarTestComponent';
-import Home from './components/pages/Home';
+// import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Landing from './components/pages/Landing';
-import DashboardTest from './components/pages/DashboardTest';
+import Dashboard from './components/pages/Dashboard';
 
 import Students from './components/students/Students';
 import Student from './components/students/Student';
@@ -43,48 +43,37 @@ const App = () => {
               <div className='App'>
                 {/* <NavbarComponent /> */}
                 <NavbarTestComponent />
-                <div className='container'>
-                  <Switch>
-                    <Route
-                      exact
-                      path='/dashboard-test'
-                      component={DashboardTest}
-                    />
-                    <Route exact path='/' component={Landing} />
-                    <Route exact path='/about' component={About} />
-                    <Route exact path='/register' component={Register} />
-                    <Route exact path='/login' component={Login} />
-                    <PrivateRoute exact path='/dashboard' component={Home} />
-                    <PrivateRoute exact path='/students' component={Students} />
-                    <PrivateRoute
-                      exact
-                      path='/student/:id'
-                      component={Student}
-                    />
-                    <PrivateRoute
-                      exact
-                      path='/create-student'
-                      component={CreateStudent}
-                    />
-                    <PrivateRoute
-                      exact
-                      path='/edit-student'
-                      component={EditStudent}
-                    />
-                    <PrivateRoute exact path='/lessons' component={Lessons} />
-                    <PrivateRoute exact path='/lesson/:id' component={Lesson} />
-                    <PrivateRoute
-                      exact
-                      path='/edit-lesson'
-                      component={EditLesson}
-                    />
-                    <PrivateRoute
-                      exact
-                      path='/create-lesson'
-                      component={CreateLesson}
-                    />
-                  </Switch>
-                </div>
+                <Switch>
+                  <Route exact path='/' component={Landing} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/register' component={Register} />
+                  <Route exact path='/login' component={Login} />
+                  <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                  <PrivateRoute exact path='/students' component={Students} />
+                  <PrivateRoute exact path='/student/:id' component={Student} />
+                  <PrivateRoute
+                    exact
+                    path='/create-student'
+                    component={CreateStudent}
+                  />
+                  <PrivateRoute
+                    exact
+                    path='/edit-student'
+                    component={EditStudent}
+                  />
+                  <PrivateRoute exact path='/lessons' component={Lessons} />
+                  <PrivateRoute exact path='/lesson/:id' component={Lesson} />
+                  <PrivateRoute
+                    exact
+                    path='/edit-lesson'
+                    component={EditLesson}
+                  />
+                  <PrivateRoute
+                    exact
+                    path='/create-lesson'
+                    component={CreateLesson}
+                  />
+                </Switch>
               </div>
             </Router>
           </AlertState>

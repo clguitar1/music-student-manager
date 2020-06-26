@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import moment from 'moment';
 import LessonContext from '../../context/lesson/lessonContext';
@@ -12,11 +11,11 @@ const LessonTableData = ({ lesson }) => {
   const alertContext = useContext(AlertContext);
 
   const {
-    lessons,
-    filtered,
-    getLessons,
-    loading,
-    addLesson,
+    // lessons,
+    // filtered,
+    // getLessons,
+    // loading,
+    // addLesson,
     deleteLesson,
     setCurrentLesson,
     clearCurrentLesson,
@@ -69,20 +68,24 @@ const LessonTableData = ({ lesson }) => {
       <td>{assignment}</td>
       <td>
         <div className='btn-group' role='group' aria-label='3 buttons'>
-          <Link to={`/lesson/${_id}`} type='button' class='btn btn-secondary'>
-            <i class='fas fa-search'></i>
+          <Link
+            to={`/lesson/${_id}`}
+            type='button'
+            className='btn btn-secondary'
+          >
+            <i className='fas fa-search'></i>
           </Link>
           <Link
             onClick={onEdit}
             to='/edit-lesson'
             type='button'
-            class='btn btn-secondary'
+            className='btn btn-secondary'
           >
             Edit
           </Link>
           <button
             type='button'
-            class='btn btn-danger'
+            className='btn btn-danger'
             onClick={() => setModalIsOpen(true)}
           >
             Delete

@@ -37,9 +37,9 @@ const StudentTableData = ({ student }) => {
     setCurrent(student);
   };
 
-  const onNewLesson = () => {
-    setCurrent(student);
-  };
+  // const onNewLesson = () => {
+  //   setCurrent(student);
+  // };
 
   return (
     <tr>
@@ -79,7 +79,7 @@ const StudentTableData = ({ student }) => {
             to='/edit-student'
             className='btn btn-secondary'
           >
-            <i class='fas fa-search'></i>
+            <i className='fas fa-search'></i>
           </Link>
           {/* <button
             className='btn btn-danger btn-sm'

@@ -12,11 +12,11 @@ const LessonItem = ({ lesson }) => {
   const alertContext = useContext(AlertContext);
 
   const {
-    lessons,
-    filtered,
-    getLessons,
-    loading,
-    addLesson,
+    // lessons,
+    // filtered,
+    // getLessons,
+    // loading,
+    // addLesson,
     deleteLesson,
     setCurrentLesson,
     clearCurrentLesson,

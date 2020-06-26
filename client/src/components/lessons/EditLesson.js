@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 import moment from 'moment';
+import './EditLesson.css';
 
 const EditLesson = (props) => {
   const lessonContext = useContext(LessonContext);
@@ -65,68 +66,94 @@ const EditLesson = (props) => {
 
   return (
     <div className='LessonForm'>
-      <form onSubmit={onSubmit}>
-        <h2 className='text-secondary'>
-          Edit {currentLesson.student.name}'s Lesson for{' '}
-          {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
-        </h2>
-        {/* <input
-          type='text'
-          placeholder='Student name'
-          name='name'
-          value={name}
-          onChange={onChange}
-        /> */}
-        <DatePicker
-          placeholderText='Click to select a date and time'
-          selected={lessonSlot}
-          onChange={onChangeDate}
-          showTimeSelect
-          dateFormat='MMMM d, yyyy h:mm aa'
-        />
-        <input
-          type='text'
-          placeholder='Assignment'
-          name='assignment'
-          value={assignment}
-          onChange={onChange}
-        />
-        <h5>Attendance</h5>
-        <div className='radio'>
-          <input
-            type='radio'
-            name='attendance'
-            value='present'
-            checked={attendance === 'present'}
-            onChange={onChange}
-          />{' '}
-          Present{'  '}
-          <input
-            type='radio'
-            name='attendance'
-            value='absent'
-            checked={attendance === 'absent'}
-            onChange={onChange}
-          />{' '}
-          Absent
-        </div>
+      <div className='container-fluid'>
+        <div className='row'>
+          <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
+            <form onSubmit={onSubmit}>
+              <h1>
+                Edit {currentLesson.student.name}'s Lesson for{' '}
+                {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
+              </h1>
+              <div class='form-group row'>
+                <label class='col-sm-2 col-form-label'>Lesson Date</label>
+                <div class='col-sm-10'>
+                  <DatePicker
+                    placeholderText='Click to select a date and time'
+                    selected={lessonSlot}
+                    onChange={onChangeDate}
+                    showTimeSelect
+                    dateFormat='MMMM d, yyyy h:mm aa'
+                    className='form-control block'
+                  />
+                </div>
+              </div>
+              <div class='form-group row'>
+                <label class='col-sm-2 col-form-label'>Assignment</label>
+                <div class='col-sm-10'>
+                  <input
+                    type='text'
+                    placeholder='Assignment'
+                    name='assignment'
+                    value={assignment}
+                    onChange={onChange}
+                    class='form-control'
+                  />
+                </div>
+              </div>
+              <fieldset class='form-group'>
+                <div class='row'>
+                  <legend class='col-form-label col-sm-2 pt-0'>
+                    attendance
+                  </legend>
+                  <div class='col-sm-10'>
+                    <div class='form-check'>
+                      <input
+                        class='form-check-input'
+                        type='radio'
+                        name='attendance'
+                        value='present'
+                        checked={attendance === 'present'}
+                        onChange={onChange}
+                      />
+                      <label class='form-check-label' for='gridRadios1'>
+                        Present
+                      </label>
+                    </div>
+                    <div class='form-check'>
+                      <input
+                        class='form-check-input'
+                        type='radio'
+                        name='attendance'
+                        value='absent'
+                        checked={attendance === 'absent'}
+                        onChange={onChange}
+                      />
+                      <label class='form-check-label' for='gridRadios2'>
+                        Absent
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
 
-        <div>
-          <input
-            type='submit'
-            value={'Update Lesson'}
-            className='btn btn-primary btn-block'
-          />
+              <div class='form-group row'>
+                <div class='col-sm-10'>
+                  <button type='submit' class='btn btn-primary'>
+                    Edit Lesson
+                  </button>
+                </div>
+              </div>
+            </form>
+            <Link
+              onClick={clearAll}
+              className='btn btn-light mr-1 my-1'
+              to='/dashboard'
+            >
+              Back
+            </Link>
+          </main>
         </div>
-        {/* <div>
-          <button className='btn btn-light btn-block' onClick={clearAll}>
-            Clear
-          </button>
-        </div> */}
-      </form>
-      <Link onClick={clearAll} className='btn btn-light' to='/dashboard'>
-        Back
-      </Link>
+      </div>
     </div>
   );
 };

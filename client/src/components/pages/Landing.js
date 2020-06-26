@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
-    <div className='landing'>
+    <div className='Landing container'>
       <div className='dark-overlay'>
         <div className='landing-inner'>
           <h1 className='x-large'>Music Lesson Tracker</h1>

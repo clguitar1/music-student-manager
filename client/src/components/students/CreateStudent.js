@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import StudentContext from '../../context/student/studentContext';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
@@ -9,7 +9,7 @@ const CreateStudent = (props) => {
   const studentContext = useContext(StudentContext);
   const alertContext = useContext(AlertContext);
 
-  const { addStudent, current, clearCurrent } = studentContext;
+  const { addStudent, current } = studentContext;
   const { setAlert } = alertContext;
 
   const [student, setStudent] = useState({

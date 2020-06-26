@@ -5,9 +5,9 @@ const router = express.Router({ mergeParams: true });
 const auth = require('../middleware/authMiddleware');
 const { check, validationResult } = require('express-validator');
 
-// @desc     Get all lessons
+// @desc     Get all user's lessons
 // @route    GET /api/lessons
-// @desc     Get all lessons associated with a single student
+// @desc     Get all user's lessons associated with a single student
 // @route    GET /api/students/:studentId/lessons
 // @access   Private
 router.get('/', auth, async (req, res) => {
@@ -19,7 +19,7 @@ router.get('/', auth, async (req, res) => {
       query = Lesson.find({ student: req.params.studentId });
     } else {
       // api/lessons
-      query = Lesson.find().populate({
+      query = Lesson.find({ user: req.user.id }).populate({
         path: 'student',
         select: 'name instrument',
       });

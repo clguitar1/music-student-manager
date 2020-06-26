@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import StudentContext from '../../context/student/studentContext';
 import LessonContext from '../../context/lesson/lessonContext';
 import DatePicker from 'react-datepicker';
@@ -12,8 +12,8 @@ const CreateLesson = (props) => {
 
   const alertContext = useContext(AlertContext);
 
-  const { setCurrent, current, clearCurrent } = studentContext;
-  const { addLesson, currentLesson, clearCurrentLesson } = lessonContext;
+  const { current, clearCurrent } = studentContext;
+  const { addLesson, clearCurrentLesson } = lessonContext;
   const { setAlert } = alertContext;
 
   const [lesson, setLesson] = useState({

@@ -104,7 +104,7 @@ const EditStudent = (props) => {
 
   return (
     <div className='StudentForm'>
-      <Modal
+      {/* <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         style={{
@@ -125,115 +125,239 @@ const EditStudent = (props) => {
           <button onClick={onDelete}>Delete Student</button>
           <button onClick={() => setModalIsOpen(false)}>Cancel</button>
         </div>
-      </Modal>
+      </Modal> */}
+      <div className='container-fluid'>
+        <div className='row'>
+          <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
+            <div className='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom'>
+              <h1>Student Details</h1>
+            </div>
+            {/* <form class='form-row' onSubmit={onSubmit}>
+              <div class='form-group col-md-6'>
+                <input
+                  type='text'
+                  placeholder='Student name'
+                  name='name'
+                  value={name}
+                  onChange={onChange}
+                  class='form-control'
+                />
+              </div>
+              <div class='form-group col-md-6'>
+                <input
+                  type='text'
+                  placeholder='Parent name'
+                  name='parentName'
+                  value={parentName}
+                  onChange={onChange}
+                  class='form-control'
+                />
+              </div>
+              <div class='form-group'>
+                <input
+                  type='email'
+                  placeholder='Email'
+                  name='email'
+                  value={email}
+                  onChange={onChange}
+                  class='form-control'
+                />
+              </div>
+              <div class='form-group'>
+                <input
+                  type='email'
+                  placeholder='Alternate Email'
+                  name='alternateEmail'
+                  value={alternateEmail}
+                  onChange={onChange}
+                  class='form-control'
+                />
+              </div>
+              <div class='form-group'>
+                <input
+                  type='text'
+                  placeholder='Phone'
+                  name='phone'
+                  value={phone}
+                  onChange={onChange}
+                  class='form-control'
+                />
+              </div>
+              <fieldset class='form-group'>
+                <div class='row'>
+                  <legend class='col-form-label col-sm-2 pt-0'>Radios</legend>
+                  <div class='col-sm-10'>
+                    <div class='form-check'>
+                      <div className='radio'>
+                        <input
+                          type='radio'
+                          name='instrument'
+                          value='violin'
+                          checked={instrument === 'violin'}
+                          onChange={onChange}
+                          class='form-check-input'
+                        />
+                        <label class='form-check-label' for='gridRadios1'>
+                          Violin
+                        </label>
+                        <input
+                          type='radio'
+                          name='instrument'
+                          value='guitar'
+                          checked={instrument === 'guitar'}
+                          onChange={onChange}
+                          class='form-check-input'
+                        />
+                        <label class='form-check-label' for='gridRadios2'>
+                          Guitar
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
 
-      <form onSubmit={onSubmit}>
-        <h2 className='text-secondary'>Student Details</h2>
-        <input
-          type='text'
-          placeholder='Student name'
-          name='name'
-          value={name}
-          onChange={onChange}
-        />
-        <input
-          type='text'
-          placeholder='Parent name'
-          name='parentName'
-          value={parentName}
-          onChange={onChange}
-        />
-        <input
-          type='email'
-          placeholder='Email'
-          name='email'
-          value={email}
-          onChange={onChange}
-        />
-        <input
-          type='email'
-          placeholder='Alternate Email'
-          name='alternateEmail'
-          value={alternateEmail}
-          onChange={onChange}
-        />
-        <input
-          type='text'
-          placeholder='Phone'
-          name='phone'
-          value={phone}
-          onChange={onChange}
-        />
-        <h5>Instrument</h5>
-        <div className='radio'>
-          <input
-            type='radio'
-            name='instrument'
-            value='violin'
-            checked={instrument === 'violin'}
-            onChange={onChange}
-          />{' '}
-          Violin{'  '}
-          <input
-            type='radio'
-            name='instrument'
-            value='guitar'
-            checked={instrument === 'guitar'}
-            onChange={onChange}
-          />{' '}
-          Guitar
-          {/* <h5>Attendance</h5>
-          <input
-            type='radio'
-            name='attendance'
-            value='present'
-            checked={attendance === 'present'}
-            onChange={onChange}
-          />{' '} */}
-          {/* Present{'  '}
-          <input
-            type='radio'
-            name='attendance'
-            value='absent'
-            checked={attendance === 'absent'}
-            onChange={onChange}
-          />{' '}
-          Absent{' '}
-          <input
-            type='radio'
-            name='attendance'
-            value=''
-            checked={attendance === ''}
-            onChange={onChange}
-          />{' '}
-          None */}
+              <div>
+                <input
+                  type='submit'
+                  value={'Update Student'}
+                  className='btn btn-primary btn-block'
+                />
+              </div>
+            </form> */}
+            <form onSubmit={onSubmit}>
+              <div class='form-group row'>
+                <label class='col-sm-2 col-form-label'>Name</label>
+                <div class='col-sm-10'>
+                  <input
+                    type='text'
+                    name='name'
+                    value={name}
+                    onChange={onChange}
+                    class='form-control'
+                  />
+                </div>
+              </div>
+              <div class='form-group row'>
+                <label class='col-sm-2 col-form-label'>Parent Name</label>
+                <div class='col-sm-10'>
+                  <input
+                    type='text'
+                    name='parentName'
+                    value={parentName}
+                    onChange={onChange}
+                    class='form-control'
+                  />
+                </div>
+              </div>
+              <div class='form-group row'>
+                <label for='inputPassword3' class='col-sm-2 col-form-label'>
+                  Email
+                </label>
+                <div class='col-sm-10'>
+                  <input
+                    type='email'
+                    name='email'
+                    value={email}
+                    onChange={onChange}
+                    class='form-control'
+                  />
+                </div>
+              </div>
+              <div class='form-group row'>
+                <label for='inputPassword3' class='col-sm-2 col-form-label'>
+                  Alternate Email
+                </label>
+                <div class='col-sm-10'>
+                  <input
+                    type='email'
+                    name='alternateEmail'
+                    value={alternateEmail}
+                    onChange={onChange}
+                    class='form-control'
+                  />
+                </div>
+              </div>
+              <div class='form-group row'>
+                <label for='inputPassword3' class='col-sm-2 col-form-label'>
+                  Phone
+                </label>
+                <div class='col-sm-10'>
+                  <input
+                    type='text'
+                    name='phone'
+                    value={phone}
+                    onChange={onChange}
+                    class='form-control'
+                  />
+                </div>
+              </div>
+              <fieldset class='form-group'>
+                <div class='row'>
+                  <legend class='col-form-label col-sm-2 pt-0'>
+                    Instrument
+                  </legend>
+                  <div class='col-sm-10'>
+                    <div class='form-check'>
+                      <input
+                        class='form-check-input'
+                        type='radio'
+                        name='instrument'
+                        value='violin'
+                        checked={instrument === 'violin'}
+                        onChange={onChange}
+                      />
+                      <label class='form-check-label' for='gridRadios1'>
+                        Violin
+                      </label>
+                    </div>
+                    <div class='form-check'>
+                      <input
+                        class='form-check-input'
+                        type='radio'
+                        name='instrument'
+                        value='guitar'
+                        checked={instrument === 'guitar'}
+                        onChange={onChange}
+                      />
+                      <label class='form-check-label' for='gridRadios2'>
+                        Guitar
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div class='form-group row'>
+                <div class='col-sm-10'>
+                  <button type='submit' class='btn btn-primary'>
+                    Update Student
+                  </button>
+                </div>
+              </div>
+            </form>
+            <Link
+              onClick={onNewLesson}
+              className='btn btn-dark mr-1 my-1'
+              to='/create-lesson'
+            >
+              New Lesson
+            </Link>
+            <button
+              className='btn btn-danger mr-1 my-1'
+              onClick={() => setModalIsOpen(true)}
+            >
+              Delete Student
+            </button>
+            <Link
+              onClick={clearAll}
+              className='btn btn-secondary my-1'
+              to='/dashboard'
+            >
+              Back
+            </Link>
+          </main>
         </div>
-
-        <div>
-          <input
-            type='submit'
-            value={'Update Student'}
-            className='btn btn-primary btn-block'
-          />
-        </div>
-        {/* <div>
-          <button className='btn btn-light btn-block' onClick={clearAll}>
-            Clear
-          </button>
-        </div> */}
-      </form>
-      <Link onClick={onNewLesson} className='btn btn-dark' to='/create-lesson'>
-        New Lesson
-      </Link>
-      <button
-        className='btn btn-danger btn-sm'
-        onClick={() => setModalIsOpen(true)}
-      >
-        Delete Student
-      </button>
-      <Link onClick={clearAll} className='btn btn-light' to='/dashboard'>
-        Back
-      </Link>
+      </div>
     </div>
   );
 };

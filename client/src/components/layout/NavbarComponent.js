@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import './Navbar.css';
 
-import { NavLink as RRNavLink } from 'react-router-dom';
+// import { NavLink as RRNavLink } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import StudentContext from '../../context/student/studentContext';
 import LessonContext from '../../context/lesson/lessonContext';
@@ -13,8 +13,8 @@ const NavbarComponent = ({ title, icon }) => {
   const studentContext = useContext(StudentContext);
   const lessonContext = useContext(LessonContext);
 
-  const { isAuthenticated, logout, user } = authContext;
-  const { clearCurrent, clearStudents } = studentContext;
+  const { isAuthenticated, logout } = authContext;
+  const { clearStudents } = studentContext;
   const { clearLessons } = lessonContext;
 
   const onLogout = () => {
@@ -23,9 +23,9 @@ const NavbarComponent = ({ title, icon }) => {
     clearLessons();
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  // const toggle = () => setIsOpen(!isOpen);
 
   // const authLinks = (
   //   <Fragment>
@@ -49,12 +49,12 @@ const NavbarComponent = ({ title, icon }) => {
   // );
 
   const authLinks = (
-    <nav class='navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow'>
-      <a class='navbar-brand col-md-3 col-lg-2 mr-0 px-3' href='#'>
+    <nav className='navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow'>
+      <a className='navbar-brand col-md-3 col-lg-2 mr-0 px-3' href='#'>
         Company name
       </a>
       <button
-        class='navbar-toggler position-absolute d-md-none collapsed'
+        className='navbar-toggler position-absolute d-md-none collapsed'
         type='button'
         data-toggle='collapse'
         data-target='#sidebarMenu'
@@ -62,17 +62,17 @@ const NavbarComponent = ({ title, icon }) => {
         aria-expanded='false'
         aria-label='Toggle navigation'
       >
-        <span class='navbar-toggler-icon'></span>
+        <span className='navbar-toggler-icon'></span>
       </button>
       <input
-        class='form-control form-control-dark w-100'
+        className='form-control form-control-dark w-100'
         type='text'
         placeholder='Search'
         aria-label='Search'
       ></input>
-      <ul class='navbar-nav px-3'>
-        <li class='nav-item text-nowrap'>
-          <a class='nav-link' href='#'>
+      <ul className='navbar-nav px-3'>
+        <li className='nav-item text-nowrap'>
+          <a className='nav-link' href='#'>
             Sign out
           </a>
         </li>

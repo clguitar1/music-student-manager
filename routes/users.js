@@ -22,12 +22,13 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.array() });
     }
 
     const { name, email, password } = req.body;
 
     try {
+      // check for existing user by email
       let user = await User.findOne({ email });
 
       if (user) {
@@ -44,13 +45,14 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
       await user.save();
 
-      // jsonwebtoken
+      // get the user id to pass into sign()
       const payload = {
         user: {
           id: user.id,
         },
       };
 
+      // generate a token passing in the user id as payload and jwtSecret constant
       jwt.sign(
         payload,
         config.get('jwtSecret'),
@@ -59,7 +61,7 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          // send back the token
+          // send back the token which includes the user id and expiration timing
           res.json({ token });
         }
       );

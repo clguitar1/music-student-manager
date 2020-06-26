@@ -25,16 +25,22 @@ const AuthState = (props) => {
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Load user
+  // Get user from backend
   const loadUser = async () => {
+    // creates a config default that will be applied to every request - a global header
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
     try {
+      // Get logged in user to allow access to protected routes. Sends back res.json(user)
       const res = await axios.get('/api/auth');
 
-      dispatch({ type: USER_LOADED, payload: res.data });
+      dispatch({
+        type: USER_LOADED,
+        // res.data is the token
+        payload: res.data,
+      });
     } catch (err) {
       dispatch({ type: AUTH_ERROR });
     }
@@ -49,10 +55,12 @@ const AuthState = (props) => {
     };
 
     try {
+      // POST api/users  register user
       const res = await axios.post('/api/users', formData, config);
-
+      console.log(res);
       dispatch({
         type: REGISTER_SUCCESS,
+        // res.data is the token
         payload: res.data,
       });
 

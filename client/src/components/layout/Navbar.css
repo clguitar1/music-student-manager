@@ -11,6 +11,10 @@
   margin-bottom: 1rem;
 }
 
+ul.navbar-nav.px-3 {
+  flex-direction: row;
+}
+
 .navbar ul {
   display: flex;
 }
