@@ -1,18 +1,22 @@
 import React, { useState, useContext, useEffect } from 'react';
-import LessonContext from '../../context/lesson/lessonContext';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import './DatePicker.css';
 import { Link } from 'react-router-dom';
-import AlertContext from '../../context/alert/alertContext';
 import moment from 'moment';
-import './EditLesson.css';
+
+import AlertContext from '../../context/alert/alertContext';
+import AuthContext from '../../context/auth/authContext';
+import LessonContext from '../../context/lesson/lessonContext';
 
 const EditLesson = (props) => {
-  const lessonContext = useContext(LessonContext);
+  const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
+  const lessonContext = useContext(LessonContext);
 
-  const { currentLesson, clearCurrentLesson, updateLesson } = lessonContext;
+  const { isAuthenticated } = authContext;
   const { setAlert } = alertContext;
+  const { currentLesson, clearCurrentLesson, updateLesson } = lessonContext;
 
   const [lesson, setLesson] = useState({
     lessonSlot: '',
@@ -24,6 +28,8 @@ const EditLesson = (props) => {
 
   // populate the form with lesson data on edit button click
   useEffect(() => {
+    authContext.loadUser();
+
     if (currentLesson !== null) {
       const newCurrent = {
         ...currentLesson,
@@ -37,7 +43,7 @@ const EditLesson = (props) => {
         assignment: '',
       });
     }
-  }, [lessonContext, currentLesson]);
+  }, [authContext, lessonContext, currentLesson]);
 
   const clearAll = () => {
     clearCurrentLesson();
@@ -65,18 +71,20 @@ const EditLesson = (props) => {
   };
 
   return (
-    <div className='LessonForm'>
+    <div className='EditLesson'>
       <div className='container-fluid'>
         <div className='row'>
           <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
             <form onSubmit={onSubmit}>
-              <h1>
-                Edit {currentLesson.student.name}'s Lesson for{' '}
-                {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
-              </h1>
-              <div class='form-group row'>
-                <label class='col-sm-2 col-form-label'>Lesson Date</label>
-                <div class='col-sm-10'>
+              {isAuthenticated && (
+                <h1>
+                  Edit {currentLesson.student.name}'s Lesson for{' '}
+                  {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
+                </h1>
+              )}
+              <div className='form-group row'>
+                <label className='col-sm-2 col-form-label'>Lesson Date</label>
+                <div className='col-sm-10'>
                   <DatePicker
                     placeholderText='Click to select a date and time'
                     selected={lessonSlot}
@@ -87,48 +95,48 @@ const EditLesson = (props) => {
                   />
                 </div>
               </div>
-              <div class='form-group row'>
-                <label class='col-sm-2 col-form-label'>Assignment</label>
-                <div class='col-sm-10'>
+              <div className='form-group row'>
+                <label className='col-sm-2 col-form-label'>Assignment</label>
+                <div className='col-sm-10'>
                   <input
                     type='text'
                     placeholder='Assignment'
                     name='assignment'
                     value={assignment}
                     onChange={onChange}
-                    class='form-control'
+                    className='form-control'
                   />
                 </div>
               </div>
-              <fieldset class='form-group'>
-                <div class='row'>
-                  <legend class='col-form-label col-sm-2 pt-0'>
-                    attendance
+              <fieldset className='form-group'>
+                <div className='row'>
+                  <legend className='col-form-label col-sm-2 pt-0'>
+                    Attendance
                   </legend>
-                  <div class='col-sm-10'>
-                    <div class='form-check'>
+                  <div className='col-sm-10'>
+                    <div className='form-check'>
                       <input
-                        class='form-check-input'
+                        className='form-check-input'
                         type='radio'
                         name='attendance'
                         value='present'
                         checked={attendance === 'present'}
                         onChange={onChange}
                       />
-                      <label class='form-check-label' for='gridRadios1'>
+                      <label className='form-check-label' htmlFor='gridRadios1'>
                         Present
                       </label>
                     </div>
-                    <div class='form-check'>
+                    <div className='form-check'>
                       <input
-                        class='form-check-input'
+                        className='form-check-input'
                         type='radio'
                         name='attendance'
                         value='absent'
                         checked={attendance === 'absent'}
                         onChange={onChange}
                       />
-                      <label class='form-check-label' for='gridRadios2'>
+                      <label className='form-check-label' htmlFor='gridRadios2'>
                         Absent
                       </label>
                     </div>
@@ -136,9 +144,9 @@ const EditLesson = (props) => {
                 </div>
               </fieldset>
 
-              <div class='form-group row'>
-                <div class='col-sm-10'>
-                  <button type='submit' class='btn btn-primary'>
+              <div className='form-group row'>
+                <div className='col-sm-10'>
+                  <button type='submit' className='btn btn-primary'>
                     Edit Lesson
                   </button>
                 </div>

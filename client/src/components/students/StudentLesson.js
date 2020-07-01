@@ -10,7 +10,6 @@ const StudentLesson = ({ lesson }) => {
       <li key={uuidv4()}>
         {attendance && (
           <span
-            style={{ float: 'right' }}
             className={
               'badge ' +
               (attendance === 'present' ? 'badge-success' : 'badge-primary')

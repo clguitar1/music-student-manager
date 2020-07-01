@@ -51,8 +51,8 @@ const StudentItem = ({ student }) => {
           },
           content: {
             top: '102px',
-            left: '103px',
-            right: '103px',
+            left: '263px',
+            right: '453px',
             bottom: '275px',
           },
         }}

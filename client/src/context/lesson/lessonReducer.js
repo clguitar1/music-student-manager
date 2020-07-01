@@ -21,7 +21,7 @@ export default (state, action) => {
         loading: false,
       };
     case GET_LESSON:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         lesson: action.payload,

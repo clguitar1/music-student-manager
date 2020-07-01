@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 
 Modal.setAppElement('#root');
+
 const LessonItem = ({ lesson }) => {
   const lessonContext = useContext(LessonContext);
   const alertContext = useContext(AlertContext);
@@ -50,8 +51,8 @@ const LessonItem = ({ lesson }) => {
           },
           content: {
             top: '102px',
-            left: '103px',
-            right: '103px',
+            left: '263px',
+            right: '453px',
             bottom: '275px',
           },
         }}
@@ -69,8 +70,8 @@ const LessonItem = ({ lesson }) => {
           Lesson Slot: {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
         </li>
         <li>Student: {student.name} </li>
-        <li>{attendance}</li>
         <li>{assignment}</li>
+        <li>{attendance}</li>
       </ul>
       <p>
         <Link onClick={onEdit} to='/edit-lesson' className='btn btn-dark mr-2'>

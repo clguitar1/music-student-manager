@@ -1,16 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
-import StudentContext from '../../context/student/studentContext';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
+
 import AlertContext from '../../context/alert/alertContext';
+import AuthContext from '../../context/auth/authContext';
+import StudentContext from '../../context/student/studentContext';
 
 const EditStudent = (props) => {
+  const authContext = useContext(AuthContext);
   const studentContext = useContext(StudentContext);
   const alertContext = useContext(AlertContext);
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const {
     deleteStudent,
@@ -19,7 +20,10 @@ const EditStudent = (props) => {
     clearCurrent,
     updateStudent,
   } = studentContext;
+
   const { setAlert } = alertContext;
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [student, setStudent] = useState({
     name: '',
@@ -30,9 +34,23 @@ const EditStudent = (props) => {
     instrument: '',
   });
 
-  // populate the form with student data on edit button click
+  // destructure fields from student state
+  const {
+    _id,
+    name,
+    parentName,
+    email,
+    alternateEmail,
+    phone,
+    instrument,
+  } = student;
+
+  // populate the form with student data on edit button click and authenticate the user
   useEffect(() => {
+    authContext.loadUser();
+
     if (current !== null) {
+      // if current is populated, get data from current and set student state with it
       const newCurrent = {
         ...current,
         // lessonSlot: new Date(current.lessonSlot),
@@ -49,16 +67,6 @@ const EditStudent = (props) => {
       });
     }
   }, [studentContext, current]);
-
-  const {
-    _id,
-    name,
-    parentName,
-    email,
-    alternateEmail,
-    phone,
-    instrument,
-  } = student;
 
   const onDelete = () => {
     deleteStudent(_id);
@@ -77,6 +85,11 @@ const EditStudent = (props) => {
     clearCurrent();
   };
 
+  // set state with student form data
+  const onChange = (e) =>
+    setStudent({ ...student, [e.target.name]: e.target.value });
+
+  // update student with student data from state then redirect
   const onSubmit = async (e) => {
     e.preventDefault();
     // update student data
@@ -90,21 +103,9 @@ const EditStudent = (props) => {
     props.history.push('/dashboard');
   };
 
-  const onChange = (e) =>
-    setStudent({ ...student, [e.target.name]: e.target.value });
-
-  // // set lessonSlot state to date object from DatePicker
-  // const onChangeDate = (date) => {
-  //   setStudent({ ...student, lessonSlot: date });
-  // };
-
-  // const onChangeDate = (date) => {
-  //   setStudent({ ...student });
-  // };
-
   return (
-    <div className='StudentForm'>
-      {/* <Modal
+    <div className='EditStudent'>
+      <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         style={{
@@ -125,211 +126,127 @@ const EditStudent = (props) => {
           <button onClick={onDelete}>Delete Student</button>
           <button onClick={() => setModalIsOpen(false)}>Cancel</button>
         </div>
-      </Modal> */}
+      </Modal>
       <div className='container-fluid'>
         <div className='row'>
           <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
             <div className='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom'>
               <h1>Student Details</h1>
             </div>
-            {/* <form class='form-row' onSubmit={onSubmit}>
-              <div class='form-group col-md-6'>
-                <input
-                  type='text'
-                  placeholder='Student name'
-                  name='name'
-                  value={name}
-                  onChange={onChange}
-                  class='form-control'
-                />
-              </div>
-              <div class='form-group col-md-6'>
-                <input
-                  type='text'
-                  placeholder='Parent name'
-                  name='parentName'
-                  value={parentName}
-                  onChange={onChange}
-                  class='form-control'
-                />
-              </div>
-              <div class='form-group'>
-                <input
-                  type='email'
-                  placeholder='Email'
-                  name='email'
-                  value={email}
-                  onChange={onChange}
-                  class='form-control'
-                />
-              </div>
-              <div class='form-group'>
-                <input
-                  type='email'
-                  placeholder='Alternate Email'
-                  name='alternateEmail'
-                  value={alternateEmail}
-                  onChange={onChange}
-                  class='form-control'
-                />
-              </div>
-              <div class='form-group'>
-                <input
-                  type='text'
-                  placeholder='Phone'
-                  name='phone'
-                  value={phone}
-                  onChange={onChange}
-                  class='form-control'
-                />
-              </div>
-              <fieldset class='form-group'>
-                <div class='row'>
-                  <legend class='col-form-label col-sm-2 pt-0'>Radios</legend>
-                  <div class='col-sm-10'>
-                    <div class='form-check'>
-                      <div className='radio'>
-                        <input
-                          type='radio'
-                          name='instrument'
-                          value='violin'
-                          checked={instrument === 'violin'}
-                          onChange={onChange}
-                          class='form-check-input'
-                        />
-                        <label class='form-check-label' for='gridRadios1'>
-                          Violin
-                        </label>
-                        <input
-                          type='radio'
-                          name='instrument'
-                          value='guitar'
-                          checked={instrument === 'guitar'}
-                          onChange={onChange}
-                          class='form-check-input'
-                        />
-                        <label class='form-check-label' for='gridRadios2'>
-                          Guitar
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-
-              <div>
-                <input
-                  type='submit'
-                  value={'Update Student'}
-                  className='btn btn-primary btn-block'
-                />
-              </div>
-            </form> */}
             <form onSubmit={onSubmit}>
-              <div class='form-group row'>
-                <label class='col-sm-2 col-form-label'>Name</label>
-                <div class='col-sm-10'>
+              <div className='form-group row'>
+                <label className='col-sm-2 col-form-label'>Name</label>
+                <div className='col-sm-10'>
                   <input
                     type='text'
                     name='name'
                     value={name}
                     onChange={onChange}
-                    class='form-control'
+                    className='form-control'
                   />
                 </div>
               </div>
-              <div class='form-group row'>
-                <label class='col-sm-2 col-form-label'>Parent Name</label>
-                <div class='col-sm-10'>
+              <div className='form-group row'>
+                <label className='col-sm-2 col-form-label'>Parent Name</label>
+                <div className='col-sm-10'>
                   <input
                     type='text'
                     name='parentName'
                     value={parentName}
                     onChange={onChange}
-                    class='form-control'
+                    className='form-control'
                   />
                 </div>
               </div>
-              <div class='form-group row'>
-                <label for='inputPassword3' class='col-sm-2 col-form-label'>
+              <div className='form-group row'>
+                <label
+                  htmlFor='inputPassword3'
+                  className='col-sm-2 col-form-label'
+                >
                   Email
                 </label>
-                <div class='col-sm-10'>
+                <div className='col-sm-10'>
                   <input
                     type='email'
                     name='email'
                     value={email}
                     onChange={onChange}
-                    class='form-control'
+                    className='form-control'
                   />
                 </div>
               </div>
-              <div class='form-group row'>
-                <label for='inputPassword3' class='col-sm-2 col-form-label'>
+              <div className='form-group row'>
+                <label
+                  htmlFor='inputPassword3'
+                  className='col-sm-2 col-form-label'
+                >
                   Alternate Email
                 </label>
-                <div class='col-sm-10'>
+                <div className='col-sm-10'>
                   <input
                     type='email'
                     name='alternateEmail'
                     value={alternateEmail}
                     onChange={onChange}
-                    class='form-control'
+                    className='form-control'
                   />
                 </div>
               </div>
-              <div class='form-group row'>
-                <label for='inputPassword3' class='col-sm-2 col-form-label'>
+              <div className='form-group row'>
+                <label
+                  htmlFor='inputPassword3'
+                  className='col-sm-2 col-form-label'
+                >
                   Phone
                 </label>
-                <div class='col-sm-10'>
+                <div className='col-sm-10'>
                   <input
                     type='text'
                     name='phone'
                     value={phone}
                     onChange={onChange}
-                    class='form-control'
+                    className='form-control'
                   />
                 </div>
               </div>
-              <fieldset class='form-group'>
-                <div class='row'>
-                  <legend class='col-form-label col-sm-2 pt-0'>
+              <fieldset className='form-group'>
+                <div className='row'>
+                  <legend className='col-form-label col-sm-2 pt-0'>
                     Instrument
                   </legend>
-                  <div class='col-sm-10'>
-                    <div class='form-check'>
+                  <div className='col-sm-10'>
+                    <div className='form-check'>
                       <input
-                        class='form-check-input'
+                        className='form-check-input'
                         type='radio'
                         name='instrument'
                         value='violin'
                         checked={instrument === 'violin'}
                         onChange={onChange}
                       />
-                      <label class='form-check-label' for='gridRadios1'>
+                      <label className='form-check-label' htmlFor='gridRadios1'>
                         Violin
                       </label>
                     </div>
-                    <div class='form-check'>
+                    <div className='form-check'>
                       <input
-                        class='form-check-input'
+                        className='form-check-input'
                         type='radio'
                         name='instrument'
                         value='guitar'
                         checked={instrument === 'guitar'}
                         onChange={onChange}
                       />
-                      <label class='form-check-label' for='gridRadios2'>
+                      <label className='form-check-label' htmlFor='gridRadios2'>
                         Guitar
                       </label>
                     </div>
                   </div>
                 </div>
               </fieldset>
-              <div class='form-group row'>
-                <div class='col-sm-10'>
-                  <button type='submit' class='btn btn-primary'>
+              <div className='form-group row'>
+                <div className='col-sm-10'>
+                  <button type='submit' className='btn btn-primary'>
                     Update Student
                   </button>
                 </div>

@@ -46,7 +46,7 @@ const Register = (props) => {
     } else if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
       // check for valid email format
-    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setAlert('Please enter a valid email', 'danger');
     } else {
       register({

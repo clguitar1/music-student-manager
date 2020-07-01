@@ -41,7 +41,7 @@ const Login = (props) => {
     if (email === '' || password === '') {
       setAlert('Please fill in all fields', 'danger');
       // check for valid email format
-    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setAlert('Please enter a valid email', 'danger');
     } else {
       login({ email, password });

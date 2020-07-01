@@ -1,13 +1,19 @@
-import React, { useState, useContext } from 'react';
-import StudentContext from '../../context/student/studentContext';
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
+import StudentContext from '../../context/student/studentContext';
 
 const CreateStudent = (props) => {
-  const studentContext = useContext(StudentContext);
+  const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
+  const studentContext = useContext(StudentContext);
+
+  useEffect(() => {
+    authContext.loadUser();
+    // eslint-disable-next-line
+  }, []);
 
   const { addStudent, current } = studentContext;
   const { setAlert } = alertContext;
@@ -23,29 +29,6 @@ const CreateStudent = (props) => {
     instrument: '',
     // attendance: '',
   });
-
-  // // populate the form with student data on edit button click
-  // useEffect(() => {
-  //   if (current !== null) {
-  //     const newCurrent = {
-  //       ...current,
-  //       // lessonSlot: new Date(current.lessonSlot),
-  //     };
-  //     setStudent(newCurrent);
-  //   } else {
-  //     setStudent({
-  //       name: '',
-  //       parentName: '',
-  //       email: '',
-  //       alternateEmail: '',
-  //       phone: '',
-  //       // lessonSlot: '',
-  //       // assignment: '',
-  //       instrument: '',
-  //       // attendance: '',
-  //     });
-  //   }
-  // }, [studentContext, current]);
 
   // const clearAll = () => {
   //   clearCurrent();
@@ -74,120 +57,145 @@ const CreateStudent = (props) => {
     // clearAll();
 
     // redirect back to home page after submit
-    props.history.push('/');
+    props.history.push('/dashboard');
   };
 
   const onChange = (e) =>
     setStudent({ ...student, [e.target.name]: e.target.value });
 
-  // // set lessonSlot state to date object from DatePicker
-  // const onChangeDate = (date) => {
-  //   setStudent({ ...student, lessonSlot: date });
-  // };
-
   return (
-    <div className='StudentForm'>
-      <form onSubmit={onSubmit}>
-        <h2 className='text-secondary'>Add Student</h2>
-        <input
-          type='text'
-          placeholder='Student name'
-          name='name'
-          value={name}
-          onChange={onChange}
-        />
-        {/* <DatePicker
-          placeholderText='Click to select a date and time'
-          selected={lessonSlot}
-          onChange={onChangeDate}
-          showTimeSelect
-          dateFormat='MMMM d, yyyy h:mm aa'
-        /> */}
-        {/* <input
-          type='text'
-          placeholder='Assignment'
-          name='assignment'
-          value={assignment}
-          onChange={onChange}
-        /> */}
-        <input
-          type='text'
-          placeholder='Parent name'
-          name='parentName'
-          value={parentName}
-          onChange={onChange}
-        />
-        <input
-          type='email'
-          placeholder='Email'
-          name='email'
-          value={email}
-          onChange={onChange}
-        />
-        <input
-          type='email'
-          placeholder='Alternate Email'
-          name='alternateEmail'
-          value={alternateEmail}
-          onChange={onChange}
-        />
-        <input
-          type='text'
-          placeholder='Phone'
-          name='phone'
-          value={phone}
-          onChange={onChange}
-        />
-        <h5>Instrument</h5>
-        <input
-          type='radio'
-          name='instrument'
-          value='violin'
-          checked={instrument === 'violin'}
-          onChange={onChange}
-        />{' '}
-        Violin{'  '}
-        <input
-          type='radio'
-          name='instrument'
-          value='guitar'
-          checked={instrument === 'guitar'}
-          onChange={onChange}
-        />{' '}
-        Guitar
-        {/* <h5>Attendance</h5>
-        <input
-          type='radio'
-          name='attendance'
-          value='present'
-          checked={attendance === 'present'}
-          onChange={onChange}
-        />{' '}
-        Present{'  '}
-        <input
-          type='radio'
-          name='attendance'
-          value='absent'
-          checked={attendance === 'absent'}
-          onChange={onChange}
-        />{' '}
-        Absent */}
-        <div>
-          <input
-            type='submit'
-            value={'Add Student'}
-            className='btn btn-primary btn-block'
-          />
+    <div className='CreateStudent'>
+      <div className='container-fluid'>
+        <div className='row'>
+          <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
+            <div className='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom'>
+              <h2>Create New Student</h2>
+            </div>
+            <form onSubmit={onSubmit}>
+              <div className='form-group row'>
+                <label className='col-sm-2 col-form-label'>Name</label>
+                <div className='col-sm-10'>
+                  <input
+                    type='text'
+                    name='name'
+                    value={name}
+                    onChange={onChange}
+                    className='form-control'
+                  />
+                </div>
+              </div>
+              <div className='form-group row'>
+                <label className='col-sm-2 col-form-label'>Parent Name</label>
+                <div className='col-sm-10'>
+                  <input
+                    type='text'
+                    name='parentName'
+                    value={parentName}
+                    onChange={onChange}
+                    className='form-control'
+                  />
+                </div>
+              </div>
+              <div className='form-group row'>
+                <label
+                  htmlFor='inputPassword3'
+                  className='col-sm-2 col-form-label'
+                >
+                  Email
+                </label>
+                <div className='col-sm-10'>
+                  <input
+                    type='email'
+                    name='email'
+                    value={email}
+                    onChange={onChange}
+                    className='form-control'
+                  />
+                </div>
+              </div>
+              <div className='form-group row'>
+                <label
+                  htmlFor='inputPassword3'
+                  className='col-sm-2 col-form-label'
+                >
+                  Alternate Email
+                </label>
+                <div className='col-sm-10'>
+                  <input
+                    type='email'
+                    name='alternateEmail'
+                    value={alternateEmail}
+                    onChange={onChange}
+                    className='form-control'
+                  />
+                </div>
+              </div>
+              <div className='form-group row'>
+                <label
+                  htmlFor='inputPassword3'
+                  className='col-sm-2 col-form-label'
+                >
+                  Phone
+                </label>
+                <div className='col-sm-10'>
+                  <input
+                    type='text'
+                    name='phone'
+                    value={phone}
+                    onChange={onChange}
+                    className='form-control'
+                  />
+                </div>
+              </div>
+              <fieldset className='form-group'>
+                <div className='row'>
+                  <legend className='col-form-label col-sm-2 pt-0'>
+                    Instrument
+                  </legend>
+                  <div className='col-sm-10'>
+                    <div className='form-check'>
+                      <input
+                        className='form-check-input'
+                        type='radio'
+                        name='instrument'
+                        value='violin'
+                        checked={instrument === 'violin'}
+                        onChange={onChange}
+                      />
+                      <label className='form-check-label' htmlFor='gridRadios1'>
+                        Violin
+                      </label>
+                    </div>
+                    <div className='form-check'>
+                      <input
+                        className='form-check-input'
+                        type='radio'
+                        name='instrument'
+                        value='guitar'
+                        checked={instrument === 'guitar'}
+                        onChange={onChange}
+                      />
+                      <label className='form-check-label' htmlFor='gridRadios2'>
+                        Guitar
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div className='form-group row'>
+                <div className='col-sm-10'>
+                  <button type='submit' className='btn btn-primary'>
+                    Create Student
+                  </button>
+                </div>
+              </div>
+            </form>
+            <Link className='btn btn-light' to='/dashboard'>
+              Back
+            </Link>
+          </main>
         </div>
-        <div>
-          {/* <button className='btn btn-light btn-block' onClick={clearAll}>
-            Clear
-          </button> */}
-        </div>
-      </form>
-      <Link className='btn btn-light' to='/'>
-        Back
-      </Link>
+      </div>
     </div>
   );
 };
