@@ -64,8 +64,19 @@ const LessonTableData = ({ lesson }) => {
       </Modal>
       <td>{moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}</td>
       <td>{student.name}</td>
-      <td>{attendance}</td>
       <td>{assignment}</td>
+      <td>
+        {attendance && (
+          <span
+            className={
+              'badge p-1 ' +
+              (attendance === 'present' ? 'badge-success' : 'badge-primary')
+            }
+          >
+            {attendance}
+          </span>
+        )}
+      </td>
       <td>
         <div className='btn-group' role='group' aria-label='3 buttons'>
           <Link

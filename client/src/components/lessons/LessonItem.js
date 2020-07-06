@@ -65,20 +65,35 @@ const LessonItem = ({ lesson }) => {
         </div>
       </Modal>
 
-      <ul className='list'>
-        <li>
-          Lesson Slot: {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
+      <div className="card-body">
+        <h5 className='card-title'>{student.name} </h5>
+      </div>
+
+      <ul className='list-group list-group-flush'>
+        <li className="list-group-item">
+          {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
         </li>
-        <li>Student: {student.name} </li>
-        <li>{assignment}</li>
-        <li>{attendance}</li>
+        <li className="list-group-item">Homework: {assignment}</li>
+        <li className="list-group-item">
+          {attendance && (
+            <span
+              className={
+                'badge p-1 ' +
+                (attendance === 'present' ? 'badge-success' : 'badge-primary')
+              }
+            >
+              {attendance}
+            </span>
+          )}
+        </li>
       </ul>
-      <p>
+
+      <div className="card-body">
         <Link onClick={onEdit} to='/edit-lesson' className='btn btn-dark mr-2'>
           Edit
         </Link>
         <button
-          className='btn btn-danger btn-sm'
+          className='btn btn-danger mr-2'
           onClick={() => setModalIsOpen(true)}
         >
           Delete
@@ -86,7 +101,7 @@ const LessonItem = ({ lesson }) => {
         <Link to={`/lesson/${_id}`} className='btn btn-dark mr-2'>
           View Lesson
         </Link>
-      </p>
+      </div>
     </div>
   );
 };

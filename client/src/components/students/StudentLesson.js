@@ -7,11 +7,16 @@ const StudentLesson = ({ lesson }) => {
   const { assignment, attendance, lessonSlot } = lesson;
   return (
     <>
-      <li key={uuidv4()}>
+      <li className="list-group-item" key={uuidv4()}>
+        <i className='fas fa-calendar-alt'></i>{' '}
+        {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
+      </li>
+      <li className="list-group-item" key={uuidv4()}>Homework: {assignment}</li>
+      <li className="list-group-item" key={uuidv4()}>
         {attendance && (
           <span
             className={
-              'badge ' +
+              'badge p-1 ' +
               (attendance === 'present' ? 'badge-success' : 'badge-primary')
             }
           >
@@ -19,11 +24,6 @@ const StudentLesson = ({ lesson }) => {
           </span>
         )}
       </li>
-      <li key={uuidv4()}>
-        <i className='fas fa-calendar-alt'></i>{' '}
-        {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
-      </li>
-      <li key={uuidv4()}>Homework: {assignment}</li>
     </>
   );
 };

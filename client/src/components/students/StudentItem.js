@@ -64,29 +64,33 @@ const StudentItem = ({ student }) => {
           <button onClick={() => setModalIsOpen(false)}>Cancel</button>
         </div>
       </Modal>
-      <h3 className='text-primary text-left'>{name} </h3>
-      <ul className='list'>
-        <li>{instrument}</li>
-        <li>Parent: {parentName}</li>
-        <li>
+
+      <div className="card-body">
+        <h5 className='card-title'>{name} </h5>
+      </div>
+
+      <ul className='list-group list-group-flush'>
+        <li className="list-group-item">{instrument}</li>
+        <li className="list-group-item">Parent: {parentName}</li>
+        <li className="list-group-item">
           <i className='fas fa-envelope-open'></i> {email}
         </li>
         {alternateEmail && (
-          <li>
+          <li className="list-group-item">
             <i className='fas fa-envelope-open'></i> {alternateEmail}
           </li>
         )}
-        <li>
+        <li className="list-group-item">
           <i className='fas fa-phone'></i> {phone}
         </li>
       </ul>
-      <p>
+
+      <div className="card-body">
         <Link onClick={onEdit} to='/edit-student' className='btn btn-dark mr-2'>
           Edit
         </Link>
-
         <button
-          className='btn btn-danger btn-sm'
+          className='btn btn-danger mr-2'
           onClick={() => setModalIsOpen(true)}
         >
           Delete
@@ -101,7 +105,7 @@ const StudentItem = ({ student }) => {
         >
           New Lesson
         </Link>
-      </p>
+      </div>
     </div>
   );
 };

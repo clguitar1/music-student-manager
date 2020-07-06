@@ -20,7 +20,7 @@ const Student = ({ match }) => {
   }, []);
 
   return (
-    <div className='Student'>
+    <div className='Student card'>
       <div className='container-fluid'>
         <div className='row'>
           <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
@@ -29,18 +29,21 @@ const Student = ({ match }) => {
                 <div className='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom'>
                   <h1>{student.name}'s Lessons</h1>
                 </div>
-                <ul className='list'>
+                <ul className='list-group list-group-flush'>
                   {student.lessons.map((lesson) => (
                     <StudentLesson key={uuidv4()} lesson={lesson} />
                   ))}
                 </ul>
+
+                <div className="card-body">
+                  <Link className='btn btn-dark' to='/dashboard'>
+                    Back
+                  </Link>
+                </div>
               </>
             ) : (
-              <Spinner />
-            )}
-            <Link className='btn btn-dark' to='/dashboard'>
-              Back
-            </Link>
+                <Spinner />
+              )}
           </main>
         </div>
       </div>

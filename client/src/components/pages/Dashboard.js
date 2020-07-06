@@ -26,13 +26,13 @@ const Dashboard = () => {
                   to='/create-student'
                   className='btn btn-sm btn-outline-secondary'
                 >
-                  <i class='fas fa-plus-square'></i> Add Student
+                  <i className='fas fa-plus-square'></i> Add Student
                 </Link>
                 <Link
                   to='/create-lesson'
                   className='btn btn-sm btn-outline-secondary'
                 >
-                  <i class='fas fa-plus-square'></i> Add Lesson
+                  <i className='fas fa-plus-square'></i> Add Lesson
                 </Link>
               </div>
             </div>
