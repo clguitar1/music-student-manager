@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const LessonSchema = new mongoose.Schema({
   assignment: {
     type: String,
-    required: true,
   },
   attendance: {
     type: String,

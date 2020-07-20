@@ -17,7 +17,7 @@ const StudentLesson = ({ lesson }) => {
           <span
             className={
               'badge p-1 ' +
-              (attendance === 'present' ? 'badge-success' : 'badge-primary')
+              (attendance === 'present' ? 'badge-success' : 'badge-danger')
             }
           >
             {attendance}

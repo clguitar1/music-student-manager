@@ -3,12 +3,13 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DatePicker.css';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+// import moment from 'moment';
 
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
 import LessonContext from '../../context/lesson/lessonContext';
 
+// pass in props to use onSubmit to redirect
 const EditLesson = (props) => {
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
@@ -24,6 +25,7 @@ const EditLesson = (props) => {
     assignment: '',
   });
 
+  // destructure lesson state from useState
   const { assignment, attendance, lessonSlot } = lesson;
 
   // populate the form with lesson data on edit button click
@@ -43,10 +45,21 @@ const EditLesson = (props) => {
         assignment: '',
       });
     }
-  }, [authContext, lessonContext, currentLesson]);
+    // pass in empty array of dependencies to avoid infinite loop
+  }, []);
 
   const clearAll = () => {
     clearCurrentLesson();
+  };
+
+  // set state with lesson form data
+  const onChange = (e) => {
+    setLesson({ ...lesson, [e.target.name]: e.target.value });
+  };
+
+  // set lessonSlot state to date object from DatePicker
+  const onChangeDate = (date) => {
+    setLesson({ ...lesson, lessonSlot: date });
   };
 
   const onSubmit = async (e) => {
@@ -58,16 +71,9 @@ const EditLesson = (props) => {
     }
     // // set currentLesson back to null
     // clearAll();
+
     // redirect back to home page after submit
     props.history.push('/dashboard');
-  };
-
-  const onChange = (e) =>
-    setLesson({ ...lesson, [e.target.name]: e.target.value });
-
-  // set lessonSlot state to date object from DatePicker
-  const onChangeDate = (date) => {
-    setLesson({ ...lesson, lessonSlot: date });
   };
 
   return (
@@ -78,8 +84,9 @@ const EditLesson = (props) => {
             <form onSubmit={onSubmit}>
               {isAuthenticated && (
                 <h1>
-                  Edit {currentLesson.student.name}'s Lesson for{' '}
-                  {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')}
+                  Edit {currentLesson.student.name}'s Lesson
+                  {/* for{' '}
+                  {moment(lessonSlot).format('dddd MMMM Do YYYY, h:mm a')} */}
                 </h1>
               )}
               <div className='form-group row'>

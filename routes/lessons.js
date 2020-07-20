@@ -25,7 +25,7 @@ router.get('/', auth, async (req, res) => {
       });
     }
 
-    const lessons = await query;
+    const lessons = await query.sort({ lessonSlot: 'asc' });
 
     // res.status(200).json({
     //   success: true,

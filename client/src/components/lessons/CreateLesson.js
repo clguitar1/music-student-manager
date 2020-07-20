@@ -15,16 +15,9 @@ const CreateLesson = (props) => {
   const lessonContext = useContext(LessonContext);
   const studentContext = useContext(StudentContext);
 
-  const { isAuthenticated, loading } = authContext;
   const { setAlert } = alertContext;
-  const {
-    student,
-    students,
-    current,
-    clearCurrent,
-    setCurrent,
-  } = studentContext;
-  const { addLesson, clearCurrentLesson, setCurrentLesson } = lessonContext;
+  const { students, current, clearCurrent, setCurrent } = studentContext;
+  const { addLesson, clearCurrentLesson } = lessonContext;
 
   const [lesson, setLesson] = useState({
     lessonStudentName: '',
@@ -37,7 +30,6 @@ const CreateLesson = (props) => {
 
   const {
     lessonStudentName,
-    lessonStudentData,
     lessonSlot,
     assignment,
     instrument,

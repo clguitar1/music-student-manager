@@ -1,6 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
@@ -8,6 +6,7 @@ import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
 import StudentContext from '../../context/student/studentContext';
 
+// pass in props to use onSubmit to redirect
 const EditStudent = (props) => {
   const authContext = useContext(AuthContext);
   const studentContext = useContext(StudentContext);
@@ -34,7 +33,7 @@ const EditStudent = (props) => {
     instrument: '',
   });
 
-  // destructure fields from student state
+  // destructure student state from useState which now includes _id set by useEffect
   const {
     _id,
     name,
@@ -53,9 +52,9 @@ const EditStudent = (props) => {
       // if current is populated, get data from current and set student state with it
       const newCurrent = {
         ...current,
-        // lessonSlot: new Date(current.lessonSlot),
       };
       setStudent(newCurrent);
+      console.log(student);
     } else {
       setStudent({
         name: '',
@@ -66,7 +65,8 @@ const EditStudent = (props) => {
         instrument: '',
       });
     }
-  }, [studentContext, current]);
+    // pass in empty array of dependencies to avoid infinite loop
+  }, []);
 
   const onDelete = () => {
     deleteStudent(_id);
